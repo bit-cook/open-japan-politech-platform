@@ -9,8 +9,8 @@ export default function AboutPage() {
         <Card>
           <h3 className="mb-3 text-xl font-bold">概要</h3>
           <p className="text-gray-700">
-            PolicyDiffは、日本の全政党のマニフェスト・政策をバージョン管理し、
-            市民がPull Requestで改善提案できるオープンソースプラットフォームです。
+            PolicyDiffは、日本の全政党のマニフェスト・政策をバージョン管理し、 市民がPull
+            Requestで改善提案できるオープンソースプラットフォームです。
             AIエージェントが変更を追跡し、誰もが政策の違いと変遷を即座に把握できます。
           </p>
         </Card>

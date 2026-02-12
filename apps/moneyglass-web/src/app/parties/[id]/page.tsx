@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
 import { Card, Stat } from "@ojpp/ui";
+import { notFound } from "next/navigation";
 import { formatCurrency } from "@/lib/format";
 import { PartyDetailCharts } from "./party-detail-charts";
 
@@ -64,11 +64,7 @@ const ORG_TYPE_LABELS: Record<string, string> = {
   FUND_MANAGEMENT: "資金管理団体",
 };
 
-export default async function PartyDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function PartyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const [party, reports] = await Promise.all([getParty(id), getPartyReports(id)]);
 

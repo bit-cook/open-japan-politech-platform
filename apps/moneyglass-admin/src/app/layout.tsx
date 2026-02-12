@@ -6,9 +6,7 @@ export const metadata: Metadata = {
   description: "MoneyGlass管理画面 - 政治資金データの取り込み・管理",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
       <body className="min-h-screen bg-gray-100 text-gray-900 antialiased">
@@ -19,11 +17,21 @@ export default function RootLayout({
               <span className="ml-2 text-xs text-gray-400">Admin</span>
             </h1>
             <nav className="space-y-2 text-sm">
-              <a href="/" className="block rounded px-3 py-2 hover:bg-gray-100">ダッシュボード</a>
-              <a href="/import" className="block rounded px-3 py-2 hover:bg-gray-100">データ取り込み</a>
-              <a href="/transactions" className="block rounded px-3 py-2 hover:bg-gray-100">取引一覧</a>
-              <a href="/reports" className="block rounded px-3 py-2 hover:bg-gray-100">報告書生成</a>
-              <a href="/settings" className="block rounded px-3 py-2 hover:bg-gray-100">設定</a>
+              <a href="/" className="block rounded px-3 py-2 hover:bg-gray-100">
+                ダッシュボード
+              </a>
+              <a href="/import" className="block rounded px-3 py-2 hover:bg-gray-100">
+                データ取り込み
+              </a>
+              <a href="/transactions" className="block rounded px-3 py-2 hover:bg-gray-100">
+                取引一覧
+              </a>
+              <a href="/reports" className="block rounded px-3 py-2 hover:bg-gray-100">
+                報告書生成
+              </a>
+              <a href="/settings" className="block rounded px-3 py-2 hover:bg-gray-100">
+                設定
+              </a>
             </nav>
           </aside>
           <main className="flex-1 p-8">{children}</main>

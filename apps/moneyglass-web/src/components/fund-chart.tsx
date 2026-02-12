@@ -1,17 +1,17 @@
 "use client";
 
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
 } from "recharts";
 
 const COLORS = [
@@ -43,12 +43,8 @@ export function YearlyBarChart({ data }: { data: YearlyData[] }) {
       <BarChart data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="year" />
-        <YAxis
-          tickFormatter={(v: number) => `${v.toFixed(0)}億`}
-        />
-        <Tooltip
-          formatter={(value: number) => [`${value.toFixed(1)}億円`]}
-        />
+        <YAxis tickFormatter={(v: number) => `${v.toFixed(0)}億`} />
+        <Tooltip formatter={(value: number) => [`${value.toFixed(1)}億円`]} />
         <Legend />
         <Bar dataKey="収入" fill="#3B82F6" />
         <Bar dataKey="支出" fill="#EF4444" />
@@ -76,15 +72,11 @@ export function CategoryPieChart({ data }: { data: PieData[] }) {
             `${name} ${(percent * 100).toFixed(0)}%`
           }
         >
-          {data.map((_entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          {data.map((entry, index) => (
+            <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip
-          formatter={(value: number) => [
-            `${(value / 100_000_000).toFixed(1)}億円`,
-          ]}
-        />
+        <Tooltip formatter={(value: number) => [`${(value / 100_000_000).toFixed(1)}億円`]} />
       </PieChart>
     </ResponsiveContainer>
   );
@@ -108,14 +100,9 @@ export function PartyComparisonChart({ data }: { data: PartyBarData[] }) {
     <ResponsiveContainer width="100%" height={400}>
       <BarChart data={chartData} layout="vertical" margin={{ left: 80 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          type="number"
-          tickFormatter={(v: number) => `${v.toFixed(0)}億`}
-        />
+        <XAxis type="number" tickFormatter={(v: number) => `${v.toFixed(0)}億`} />
         <YAxis type="category" dataKey="name" width={80} />
-        <Tooltip
-          formatter={(value: number) => [`${value.toFixed(1)}億円`]}
-        />
+        <Tooltip formatter={(value: number) => [`${value.toFixed(1)}億円`]} />
         <Legend />
         <Bar dataKey="収入" fill="#3B82F6" />
         <Bar dataKey="支出" fill="#EF4444" />

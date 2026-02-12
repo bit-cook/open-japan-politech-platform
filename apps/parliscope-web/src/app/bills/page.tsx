@@ -32,7 +32,7 @@ export default async function BillsPage({ searchParams }: PageProps) {
   if (params.sessionId) where.sessionId = params.sessionId;
   if (params.category) where.category = params.category;
 
-  const [bills, total, sessions, categories] = await Promise.all([
+  const [bills, total, sessions] = await Promise.all([
     prisma.bill.findMany({
       where,
       skip,
@@ -42,7 +42,6 @@ export default async function BillsPage({ searchParams }: PageProps) {
     }),
     prisma.bill.count({ where }),
     prisma.dietSession.findMany({ orderBy: { number: "desc" } }),
-    prisma.bill.groupBy({ by: ["category"], where: { category: { not: null } } }),
   ]);
 
   const totalPages = Math.ceil(total / limit);
@@ -53,7 +52,7 @@ export default async function BillsPage({ searchParams }: PageProps) {
 
       <div className="mb-6 flex flex-wrap gap-3">
         <div>
-          <label className="mb-1 block text-xs text-gray-500">ステータス</label>
+          <span className="mb-1 block text-xs text-gray-500">ステータス</span>
           <div className="flex flex-wrap gap-1">
             {STATUSES.map((s) => (
               <a
@@ -71,7 +70,7 @@ export default async function BillsPage({ searchParams }: PageProps) {
           </div>
         </div>
         <div>
-          <label className="mb-1 block text-xs text-gray-500">会期</label>
+          <span className="mb-1 block text-xs text-gray-500">会期</span>
           <div className="flex flex-wrap gap-1">
             <a
               href={`/bills?status=${params.status ?? ""}&sessionId=&category=${params.category ?? ""}`}

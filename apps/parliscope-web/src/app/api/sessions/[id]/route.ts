@@ -1,11 +1,8 @@
-import { prisma } from "@ojpp/db";
 import { ApiError, handleApiError, jsonResponse } from "@ojpp/api";
+import { prisma } from "@ojpp/db";
 import type { NextRequest } from "next/server";
 
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const session = await prisma.dietSession.findUnique({

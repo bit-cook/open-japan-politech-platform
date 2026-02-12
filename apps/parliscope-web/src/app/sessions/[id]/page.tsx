@@ -1,6 +1,6 @@
 import { prisma } from "@ojpp/db";
-import { notFound } from "next/navigation";
 import { Badge, Card } from "@ojpp/ui";
+import { notFound } from "next/navigation";
 import { BillStatusBadge } from "@/components/bill-status-badge";
 
 export const dynamic = "force-dynamic";

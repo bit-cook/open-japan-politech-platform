@@ -22,7 +22,10 @@ export function parsePagination(
 ): PaginationParams {
   const url = new URL(request.url);
   const page = Math.max(1, Number(url.searchParams.get("page")) || defaults.page || 1);
-  const limit = Math.min(100, Math.max(1, Number(url.searchParams.get("limit")) || defaults.limit || 20));
+  const limit = Math.min(
+    100,
+    Math.max(1, Number(url.searchParams.get("limit")) || defaults.limit || 20),
+  );
   const skip = (page - 1) * limit;
   return { page, limit, skip };
 }

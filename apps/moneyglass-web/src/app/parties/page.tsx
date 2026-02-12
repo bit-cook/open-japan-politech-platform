@@ -29,9 +29,7 @@ export default async function PartiesPage() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-12">
       <h2 className="mb-2 text-3xl font-bold">政党別資金集計</h2>
-      <p className="mb-8 text-gray-600">
-        各政党の政治団体における資金の総計を比較
-      </p>
+      <p className="mb-8 text-gray-600">各政党の政治団体における資金の総計を比較</p>
 
       {parties.length === 0 ? (
         <p className="text-center text-gray-500">データがありません</p>

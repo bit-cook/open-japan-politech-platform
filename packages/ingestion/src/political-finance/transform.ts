@@ -2,19 +2,8 @@
  * Raw APIデータ → Prismaモデルへの変換
  */
 
-import type {
-  RawOrganization,
-  RawFundReport,
-  RawIncome,
-  RawExpenditure,
-} from "./client";
-
-import type {
-  OrgType,
-  IncomeCategory,
-  ExpenditureCategory,
-  ReportStatus,
-} from "@ojpp/db";
+import type { ExpenditureCategory, IncomeCategory, OrgType, ReportStatus } from "@ojpp/db";
+import type { RawExpenditure, RawFundReport, RawIncome, RawOrganization } from "./client";
 
 export interface TransformedOrganization {
   name: string;

@@ -50,7 +50,7 @@ export default async function PoliticiansPage({ searchParams }: PageProps) {
 
       <div className="mb-6 flex flex-wrap gap-3">
         <div>
-          <label className="mb-1 block text-xs text-gray-500">議院</label>
+          <span className="mb-1 block text-xs text-gray-500">議院</span>
           <div className="flex gap-1">
             <a
               href={`/politicians?party=${params.party ?? ""}&chamber=`}
@@ -85,7 +85,7 @@ export default async function PoliticiansPage({ searchParams }: PageProps) {
           </div>
         </div>
         <div>
-          <label className="mb-1 block text-xs text-gray-500">政党</label>
+          <span className="mb-1 block text-xs text-gray-500">政党</span>
           <div className="flex flex-wrap gap-1">
             <a
               href={`/politicians?party=&chamber=${params.chamber ?? ""}`}

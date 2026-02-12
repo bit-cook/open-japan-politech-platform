@@ -1,20 +1,20 @@
 import { prisma } from "@ojpp/db";
-import { Stat, Card, Badge } from "@ojpp/ui";
+import { Badge, Card, Stat } from "@ojpp/ui";
 import { PartyChip } from "@/components/party-chip";
 
 export const dynamic = "force-dynamic";
 
 const CATEGORY_ICONS: Record<string, string> = {
-  "教育": "📚",
-  "子育て": "👶",
-  "医療": "🏥",
+  教育: "📚",
+  子育て: "👶",
+  医療: "🏥",
   "経済・財政": "💰",
-  "デジタル": "💻",
-  "エネルギー": "⚡",
+  デジタル: "💻",
+  エネルギー: "⚡",
   "外交・安全保障": "🌏",
-  "福祉": "🤝",
-  "産業": "🏭",
-  "科学技術": "🔬",
+  福祉: "🤝",
+  産業: "🏭",
+  科学技術: "🔬",
 };
 
 export default async function Home() {
@@ -48,7 +48,8 @@ export default async function Home() {
       <section className="mb-12">
         <h2 className="mb-4 text-3xl font-bold">すべての政党の政策を、比較できる場所</h2>
         <p className="mb-2 max-w-2xl text-lg text-gray-600">
-          PolicyDiffは、各政党の政策をGitで管理し、市民がPull Requestで改善提案できるオープンソースプラットフォームです。
+          PolicyDiffは、各政党の政策をGitで管理し、市民がPull
+          Requestで改善提案できるオープンソースプラットフォームです。
         </p>
         <p className="mb-8 max-w-2xl text-gray-500">
           特定の政党のためではなく、民主主義のインフラとして。

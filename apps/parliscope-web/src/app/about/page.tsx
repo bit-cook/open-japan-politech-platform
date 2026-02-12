@@ -38,8 +38,8 @@ export default function AboutPage() {
         <Card>
           <h3 className="mb-3 text-lg font-semibold">オープンソース</h3>
           <p className="text-gray-700">
-            本プロジェクトはAGPL-3.0ライセンスのもとで公開されています。
-            Open Japan PoliTech Platformの一部として開発されています。
+            本プロジェクトはAGPL-3.0ライセンスのもとで公開されています。 Open Japan PoliTech
+            Platformの一部として開発されています。
           </p>
         </Card>
       </div>

@@ -1,5 +1,5 @@
+import { Badge, Card } from "@ojpp/ui";
 import { notFound } from "next/navigation";
-import { Card, Badge } from "@ojpp/ui";
 import { formatCurrency } from "@/lib/format";
 
 const ORG_TYPE_LABELS: Record<string, string> = {
@@ -102,7 +102,9 @@ export default async function OrganizationDetailPage({
                       </a>
                     </td>
                     <td className="px-4 py-3 text-right">{formatCurrency(report.totalIncome)}</td>
-                    <td className="px-4 py-3 text-right">{formatCurrency(report.totalExpenditure)}</td>
+                    <td className="px-4 py-3 text-right">
+                      {formatCurrency(report.totalExpenditure)}
+                    </td>
                     <td className="px-4 py-3 text-right">{formatCurrency(report.balance)}</td>
                     <td className="px-4 py-3">
                       <Badge variant={report.status === "PUBLISHED" ? "success" : "default"}>

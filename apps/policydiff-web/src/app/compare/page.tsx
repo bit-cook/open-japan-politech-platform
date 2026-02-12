@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Card } from "@ojpp/ui";
+import { useEffect, useState } from "react";
 
 interface Party {
   id: string;
@@ -17,8 +17,16 @@ interface Policy {
 }
 
 const CATEGORIES = [
-  "教育", "子育て", "医療", "経済・財政", "デジタル",
-  "エネルギー", "外交・安全保障", "福祉", "産業", "科学技術",
+  "教育",
+  "子育て",
+  "医療",
+  "経済・財政",
+  "デジタル",
+  "エネルギー",
+  "外交・安全保障",
+  "福祉",
+  "産業",
+  "科学技術",
 ];
 
 export default function ComparePage() {
@@ -102,9 +110,7 @@ export default function ComparePage() {
               type="button"
               onClick={() => toggleParty(party.name)}
               className={`inline-flex items-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors ${
-                selectedParties.includes(party.name)
-                  ? "bg-opacity-10"
-                  : "opacity-40"
+                selectedParties.includes(party.name) ? "bg-opacity-10" : "opacity-40"
               }`}
               style={{
                 borderColor: party.color ?? "#6b7280",
@@ -151,6 +157,7 @@ export default function ComparePage() {
               <h3 className="mb-3 text-base font-bold">{policy.title}</h3>
               <div
                 className="flex-1 text-sm text-gray-700"
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: policy content from trusted source
                 dangerouslySetInnerHTML={{
                   __html: policy.content
                     .replace(/^## (.+)$/gm, "<h3 class='font-bold mt-3 mb-1'>$1</h3>")

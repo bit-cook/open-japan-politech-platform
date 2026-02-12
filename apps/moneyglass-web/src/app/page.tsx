@@ -1,4 +1,4 @@
-import { Stat, Card } from "@ojpp/ui";
+import { Card, Stat } from "@ojpp/ui";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { DashboardCharts } from "./dashboard-charts";
 
@@ -48,7 +48,8 @@ export default async function Home() {
           <p className="text-center text-gray-500">
             データを読み込み中、またはデータベースにデータがありません。
             <br />
-            <code className="text-xs">pnpm --filter @ojpp/ingestion ingest:finance</code> を実行してデータを投入してください。
+            <code className="text-xs">pnpm --filter @ojpp/ingestion ingest:finance</code>{" "}
+            を実行してデータを投入してください。
           </p>
         </Card>
       </div>
@@ -59,9 +60,7 @@ export default async function Home() {
     <div className="mx-auto max-w-7xl px-6 py-12">
       <section className="mb-12">
         <h2 className="mb-2 text-3xl font-bold">政治資金ダッシュボード</h2>
-        <p className="mb-8 text-gray-600">
-          全政党・全政治団体の資金の流れをリアルタイムで可視化
-        </p>
+        <p className="mb-8 text-gray-600">全政党・全政治団体の資金の流れをリアルタイムで可視化</p>
 
         <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Stat label="登録団体数" value={formatNumber(stats.organizationCount)} />
@@ -109,7 +108,9 @@ export default async function Home() {
                   </td>
                   <td className="px-4 py-3">{report.fiscalYear}年</td>
                   <td className="px-4 py-3 text-right">{formatCurrency(report.totalIncome)}</td>
-                  <td className="px-4 py-3 text-right">{formatCurrency(report.totalExpenditure)}</td>
+                  <td className="px-4 py-3 text-right">
+                    {formatCurrency(report.totalExpenditure)}
+                  </td>
                 </tr>
               ))}
             </tbody>

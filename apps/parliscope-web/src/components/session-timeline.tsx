@@ -11,7 +11,10 @@ interface SessionTimelineProps {
   }>;
 }
 
-const TYPE_LABELS: Record<string, { label: string; variant: "default" | "success" | "warning" | "info" }> = {
+const TYPE_LABELS: Record<
+  string,
+  { label: string; variant: "default" | "success" | "warning" | "info" }
+> = {
   ORDINARY: { label: "通常", variant: "info" },
   EXTRAORDINARY: { label: "臨時", variant: "warning" },
   SPECIAL: { label: "特別", variant: "success" },
@@ -21,7 +24,10 @@ export function SessionTimeline({ sessions }: SessionTimelineProps) {
   return (
     <div className="space-y-4">
       {sessions.map((session) => {
-        const typeConfig = TYPE_LABELS[session.type] ?? { label: session.type, variant: "default" as const };
+        const typeConfig = TYPE_LABELS[session.type] ?? {
+          label: session.type,
+          variant: "default" as const,
+        };
         return (
           <a
             key={session.id}

@@ -1,4 +1,4 @@
-import { Card, Badge } from "@ojpp/ui";
+import { Badge, Card } from "@ojpp/ui";
 
 const API_ENDPOINTS = [
   {
@@ -8,7 +8,11 @@ const API_ENDPOINTS = [
     params: [
       { name: "party", type: "string", description: "政党名でフィルタ" },
       { name: "category", type: "string", description: "カテゴリでフィルタ" },
-      { name: "status", type: "string", description: "ステータスでフィルタ (DRAFT|PUBLISHED|ARCHIVED)" },
+      {
+        name: "status",
+        type: "string",
+        description: "ステータスでフィルタ (DRAFT|PUBLISHED|ARCHIVED)",
+      },
       { name: "page", type: "number", description: "ページ番号 (default: 1)" },
       { name: "limit", type: "number", description: "1ページあたりの件数 (default: 20, max: 100)" },
     ],
@@ -17,9 +21,7 @@ const API_ENDPOINTS = [
     method: "GET",
     path: "/api/policies/:id",
     description: "政策詳細を取得（政党情報・変更提案を含む）",
-    params: [
-      { name: "id", type: "string", description: "政策ID (path parameter)" },
-    ],
+    params: [{ name: "id", type: "string", description: "政策ID (path parameter)" }],
   },
   {
     method: "GET",
@@ -41,7 +43,11 @@ const API_ENDPOINTS = [
     path: "/api/proposals",
     description: "政策変更提案一覧を取得",
     params: [
-      { name: "status", type: "string", description: "ステータスでフィルタ (OPEN|UNDER_REVIEW|ACCEPTED|REJECTED|WITHDRAWN)" },
+      {
+        name: "status",
+        type: "string",
+        description: "ステータスでフィルタ (OPEN|UNDER_REVIEW|ACCEPTED|REJECTED|WITHDRAWN)",
+      },
       { name: "page", type: "number", description: "ページ番号" },
       { name: "limit", type: "number", description: "1ページあたりの件数" },
     ],
@@ -66,9 +72,7 @@ export default function ApiDocsPage() {
       <div className="mb-8">
         <Card padding="sm">
           <h3 className="mb-2 text-sm font-bold text-gray-500">ベースURL</h3>
-          <code className="rounded bg-gray-100 px-2 py-1 text-sm">
-            http://localhost:3002/api
-          </code>
+          <code className="rounded bg-gray-100 px-2 py-1 text-sm">http://localhost:3002/api</code>
         </Card>
       </div>
 
@@ -116,7 +120,7 @@ export default function ApiDocsPage() {
             ページネーション付きのエンドポイントは以下の形式でレスポンスを返します。
           </p>
           <pre className="overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-green-400">
-{`{
+            {`{
   "data": [...],
   "pagination": {
     "page": 1,

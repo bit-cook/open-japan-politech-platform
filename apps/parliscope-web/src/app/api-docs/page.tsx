@@ -60,7 +60,7 @@ export default function ApiDocsPage() {
         <Card>
           <h3 className="mb-2 font-semibold">共通レスポンス形式（ページネーション）</h3>
           <pre className="overflow-x-auto rounded bg-gray-900 p-4 text-sm text-green-400">
-{`{
+            {`{
   "data": [...],
   "pagination": {
     "page": 1,

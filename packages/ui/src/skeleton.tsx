@@ -13,11 +13,18 @@ export function Skeleton({ className = "", width, height }: SkeletonProps) {
   );
 }
 
-export function SkeletonText({ lines = 3, className = "" }: { lines?: number; className?: string }) {
+export function SkeletonText({
+  lines = 3,
+  className = "",
+}: {
+  lines?: number;
+  className?: string;
+}) {
   return (
     <div className={`space-y-2 ${className}`}>
       {Array.from({ length: lines }).map((_, i) => (
         <Skeleton
+          // biome-ignore lint/suspicious/noArrayIndexKey: static skeleton list
           key={`skeleton-line-${i}`}
           className="h-4"
           width={i === lines - 1 ? "75%" : "100%"}

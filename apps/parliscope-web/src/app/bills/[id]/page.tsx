@@ -1,10 +1,11 @@
 import { prisma } from "@ojpp/db";
-import { notFound } from "next/navigation";
 import { Card } from "@ojpp/ui";
+import { notFound } from "next/navigation";
 import { BillStatusBadge } from "@/components/bill-status-badge";
 import { DiscussionThread } from "@/components/discussion-thread";
 
 export const dynamic = "force-dynamic";
+
 import { VoteChart } from "@/components/vote-chart";
 
 interface PageProps {
@@ -144,7 +145,9 @@ export default async function BillDetailPage({ params }: PageProps) {
               <div>
                 <dt className="text-gray-500">提出日</dt>
                 <dd className="font-medium">
-                  {bill.submittedAt ? new Date(bill.submittedAt).toLocaleDateString("ja-JP") : "不明"}
+                  {bill.submittedAt
+                    ? new Date(bill.submittedAt).toLocaleDateString("ja-JP")
+                    : "不明"}
                 </dd>
               </div>
               {bill.passedAt && (

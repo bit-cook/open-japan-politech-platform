@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import { Card } from "@ojpp/ui";
-import { SearchInput } from "@/components/search-input";
+import { useCallback, useEffect, useState } from "react";
 import { FilterBar } from "@/components/filter-bar";
+import { SearchInput } from "@/components/search-input";
+
 interface Organization {
   id: string;
   name: string;
@@ -69,18 +70,12 @@ export function OrganizationList() {
     setPage(1);
   }, []);
 
-  const filteredData = data?.data.filter(
-    (org) => !search || org.name.includes(search),
-  );
+  const filteredData = data?.data.filter((org) => !search || org.name.includes(search));
 
   return (
     <div>
       <div className="mb-6 space-y-4">
-        <SearchInput
-          placeholder="団体名で検索..."
-          onSearch={handleSearch}
-          defaultValue={search}
-        />
+        <SearchInput placeholder="団体名で検索..." onSearch={handleSearch} defaultValue={search} />
         <FilterBar
           filters={[
             {
@@ -129,9 +124,7 @@ export function OrganizationList() {
                       </span>
                     )}
                   </div>
-                  {org.address && (
-                    <p className="mt-2 text-xs text-gray-400">{org.address}</p>
-                  )}
+                  {org.address && <p className="mt-2 text-xs text-gray-400">{org.address}</p>}
                 </Card>
               </a>
             ))}

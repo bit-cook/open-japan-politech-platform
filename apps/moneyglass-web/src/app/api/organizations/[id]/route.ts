@@ -1,10 +1,7 @@
-import { prisma } from "@ojpp/db";
 import { ApiError, handleApiError, jsonResponse, serializeBigInt } from "@ojpp/api";
+import { prisma } from "@ojpp/db";
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const org = await prisma.politicalOrganization.findUnique({

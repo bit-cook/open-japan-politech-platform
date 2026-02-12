@@ -5,9 +5,7 @@ interface PartyChipProps {
 }
 
 export function PartyChip({ name, color, href }: PartyChipProps) {
-  const style = color
-    ? { borderColor: color, color: color }
-    : {};
+  const style = color ? { borderColor: color, color: color } : {};
 
   const className =
     "inline-flex items-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors hover:opacity-80";

@@ -3,12 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MoneyGlass - 政治資金を、ガラスのように透明に",
-  description: "全政党・全政治団体の資金の流れを可視化。AIエージェントが24時間監視・分析し、誰もが政治資金の実態にアクセスできる。",
+  description:
+    "全政党・全政治団体の資金の流れを可視化。AIエージェントが24時間監視・分析し、誰もが政治資金の実態にアクセスできる。",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
       <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
@@ -20,11 +19,21 @@ export default function RootLayout({
               </a>
             </h1>
             <nav className="flex gap-6 text-sm">
-              <a href="/" className="hover:text-blue-600">ダッシュボード</a>
-              <a href="/organizations" className="hover:text-blue-600">団体一覧</a>
-              <a href="/parties" className="hover:text-blue-600">政党別</a>
-              <a href="/api-docs" className="hover:text-blue-600">API</a>
-              <a href="/about" className="hover:text-blue-600">About</a>
+              <a href="/" className="hover:text-blue-600">
+                ダッシュボード
+              </a>
+              <a href="/organizations" className="hover:text-blue-600">
+                団体一覧
+              </a>
+              <a href="/parties" className="hover:text-blue-600">
+                政党別
+              </a>
+              <a href="/api-docs" className="hover:text-blue-600">
+                API
+              </a>
+              <a href="/about" className="hover:text-blue-600">
+                About
+              </a>
             </nav>
           </div>
         </header>

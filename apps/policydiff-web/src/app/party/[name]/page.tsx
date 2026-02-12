@@ -1,7 +1,7 @@
 import { prisma } from "@ojpp/db";
+import { Badge } from "@ojpp/ui";
 import { notFound } from "next/navigation";
 import { PolicyCard } from "@/components/policy-card";
-import { Badge } from "@ojpp/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -47,13 +47,9 @@ export default async function PartyPage({ params }: Props) {
             />
           )}
           <h2 className="text-3xl font-bold">{party.name}</h2>
-          {party.shortName && (
-            <Badge>{party.shortName}</Badge>
-          )}
+          {party.shortName && <Badge>{party.shortName}</Badge>}
         </div>
-        <p className="mt-2 text-gray-600">
-          登録政策数: {party.policies.length}件
-        </p>
+        <p className="mt-2 text-gray-600">登録政策数: {party.policies.length}件</p>
         {party.website && (
           <a
             href={party.website}
@@ -79,7 +75,10 @@ export default async function PartyPage({ params }: Props) {
                 partyName={party.name}
                 partyColor={party.color}
                 status={policy.status}
-                contentPreview={policy.content.slice(0, 100).replace(/[#*\n]/g, " ").trim()}
+                contentPreview={policy.content
+                  .slice(0, 100)
+                  .replace(/[#*\n]/g, " ")
+                  .trim()}
               />
             ))}
           </div>

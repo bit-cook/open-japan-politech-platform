@@ -32,8 +32,7 @@ export default function AboutPage() {
           <h3 className="mb-3 text-xl font-bold">データソース</h3>
           <p className="leading-relaxed text-gray-700">
             本プラットフォームのデータは、総務省および各都道府県選挙管理委員会が
-            公開する政治資金収支報告書に基づいています。
-            現在はサンプルデータを使用していますが、
+            公開する政治資金収支報告書に基づいています。 現在はサンプルデータを使用していますが、
             将来的にはpolitical-finance-database.com等の公開データベースとの連携を予定しています。
           </p>
         </Card>

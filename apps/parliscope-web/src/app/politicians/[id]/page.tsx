@@ -1,6 +1,6 @@
 import { prisma } from "@ojpp/db";
-import { notFound } from "next/navigation";
 import { Badge, Card } from "@ojpp/ui";
+import { notFound } from "next/navigation";
 import { BillStatusBadge } from "@/components/bill-status-badge";
 
 export const dynamic = "force-dynamic";
@@ -64,9 +64,7 @@ export default async function PoliticianDetailPage({ params }: PageProps) {
         </div>
         <div>
           <h2 className="text-2xl font-bold">{politician.name}</h2>
-          {politician.nameKana && (
-            <p className="text-sm text-gray-500">{politician.nameKana}</p>
-          )}
+          {politician.nameKana && <p className="text-sm text-gray-500">{politician.nameKana}</p>}
           <div className="mt-1 flex items-center gap-2">
             {politician.party && (
               <Badge>{politician.party.shortName ?? politician.party.name}</Badge>

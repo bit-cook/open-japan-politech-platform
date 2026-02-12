@@ -1,6 +1,9 @@
 import { Badge } from "@ojpp/ui";
 
-const STATUS_MAP: Record<string, { label: string; variant: "default" | "success" | "warning" | "danger" | "info" }> = {
+const STATUS_MAP: Record<
+  string,
+  { label: string; variant: "default" | "success" | "warning" | "danger" | "info" }
+> = {
   SUBMITTED: { label: "提出", variant: "default" },
   COMMITTEE: { label: "委員会審議中", variant: "info" },
   PLENARY: { label: "本会議審議中", variant: "info" },

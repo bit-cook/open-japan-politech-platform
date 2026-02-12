@@ -1,5 +1,5 @@
+import { Badge, Card, Stat } from "@ojpp/ui";
 import { notFound } from "next/navigation";
-import { Card, Badge, Stat } from "@ojpp/ui";
 import { formatCurrency } from "@/lib/format";
 import { ReportCharts } from "./report-charts";
 
@@ -39,8 +39,20 @@ interface ReportDetail {
     name: string;
     party: { name: string; color: string | null } | null;
   };
-  incomes: { id: string; category: string; source: string | null; amount: string; description: string | null }[];
-  expenditures: { id: string; category: string; recipient: string | null; amount: string; description: string | null }[];
+  incomes: {
+    id: string;
+    category: string;
+    source: string | null;
+    amount: string;
+    description: string | null;
+  }[];
+  expenditures: {
+    id: string;
+    category: string;
+    recipient: string | null;
+    amount: string;
+    description: string | null;
+  }[];
 }
 
 async function getReport(id: string): Promise<ReportDetail | null> {
@@ -51,11 +63,7 @@ async function getReport(id: string): Promise<ReportDetail | null> {
   return res.json();
 }
 
-export default async function ReportDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function ReportDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const report = await getReport(id);
   if (!report) notFound();
@@ -81,9 +89,7 @@ export default async function ReportDetailPage({
       </div>
 
       <div className="mb-8 flex items-center gap-3">
-        <h2 className="text-3xl font-bold">
-          {report.fiscalYear}年度 収支報告書
-        </h2>
+        <h2 className="text-3xl font-bold">{report.fiscalYear}年度 収支報告書</h2>
         <Badge variant={report.status === "PUBLISHED" ? "success" : "default"}>
           {report.status}
         </Badge>

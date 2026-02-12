@@ -4,13 +4,13 @@
  * 11政党 x (政党支部 + 資金管理団体) x 3年分 = 66件の報告書を生成
  */
 
-import { prisma } from "@ojpp/db";
-import { getParties, getOrganizations, getReportsWithDetails } from "./client";
+import { type PoliticalOrganization, prisma } from "@ojpp/db";
+import { getOrganizations, getParties, getReportsWithDetails } from "./client";
 import {
+  transformExpenditure,
+  transformIncome,
   transformOrganization,
   transformReport,
-  transformIncome,
-  transformExpenditure,
 } from "./transform";
 
 export async function ingestPoliticalFinance(): Promise<void> {
@@ -55,7 +55,7 @@ export async function ingestPoliticalFinance(): Promise<void> {
       where: { name: transformed.name, partyId },
     });
 
-    let org;
+    let org: PoliticalOrganization;
     if (existing) {
       org = await prisma.politicalOrganization.update({
         where: { id: existing.id },
@@ -123,8 +123,7 @@ export async function ingestPoliticalFinance(): Promise<void> {
     // Insert incomes
     const reportIncomes = incomes.filter(
       (i) =>
-        i.organizationName === rawReport.organizationName &&
-        i.fiscalYear === rawReport.fiscalYear,
+        i.organizationName === rawReport.organizationName && i.fiscalYear === rawReport.fiscalYear,
     );
     for (const rawIncome of reportIncomes) {
       const ti = transformIncome(rawIncome);
@@ -144,8 +143,7 @@ export async function ingestPoliticalFinance(): Promise<void> {
     // Insert expenditures
     const reportExpenditures = expenditures.filter(
       (e) =>
-        e.organizationName === rawReport.organizationName &&
-        e.fiscalYear === rawReport.fiscalYear,
+        e.organizationName === rawReport.organizationName && e.fiscalYear === rawReport.fiscalYear,
     );
     for (const rawExp of reportExpenditures) {
       const te = transformExpenditure(rawExp);

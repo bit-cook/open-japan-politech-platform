@@ -14,7 +14,11 @@ const ENDPOINTS: Endpoint[] = [
     description: "政治団体の一覧を取得",
     params: [
       { name: "party", type: "string", description: "政党IDでフィルタ" },
-      { name: "type", type: "string", description: "団体種別でフィルタ (PARTY_BRANCH | FUND_MANAGEMENT)" },
+      {
+        name: "type",
+        type: "string",
+        description: "団体種別でフィルタ (PARTY_BRANCH | FUND_MANAGEMENT)",
+      },
       { name: "page", type: "number", description: "ページ番号 (デフォルト: 1)" },
       { name: "limit", type: "number", description: "1ページの件数 (デフォルト: 20, 最大: 100)" },
     ],
@@ -64,15 +68,11 @@ export default function ApiDocsPage() {
       <div className="mb-8">
         <Card>
           <h3 className="mb-2 font-bold">Base URL</h3>
-          <code className="rounded bg-gray-100 px-2 py-1 text-sm">
-            https://your-domain.com/api
-          </code>
+          <code className="rounded bg-gray-100 px-2 py-1 text-sm">https://your-domain.com/api</code>
           <h3 className="mb-2 mt-4 font-bold">レスポンス形式</h3>
-          <p className="text-sm text-gray-600">
-            一覧APIはページネーション付きで返却されます:
-          </p>
+          <p className="text-sm text-gray-600">一覧APIはページネーション付きで返却されます:</p>
           <pre className="mt-2 overflow-x-auto rounded bg-gray-900 p-4 text-sm text-green-400">
-{`{
+            {`{
   "data": [...],
   "pagination": {
     "page": 1,

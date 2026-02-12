@@ -1,5 +1,5 @@
-import { prisma } from "@ojpp/db";
 import type { SessionType } from "@ojpp/db";
+import { prisma } from "@ojpp/db";
 
 interface SessionData {
   number: number;

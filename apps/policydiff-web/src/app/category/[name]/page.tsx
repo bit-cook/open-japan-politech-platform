@@ -62,7 +62,10 @@ export default async function CategoryPage({ params }: Props) {
             partyName={policy.party?.name}
             partyColor={policy.party?.color}
             status={policy.status}
-            contentPreview={policy.content.slice(0, 100).replace(/[#*\n]/g, " ").trim()}
+            contentPreview={policy.content
+              .slice(0, 100)
+              .replace(/[#*\n]/g, " ")
+              .trim()}
           />
         ))}
       </div>

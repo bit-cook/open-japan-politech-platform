@@ -1,4 +1,4 @@
-import { Card, Badge } from "@ojpp/ui";
+import { Badge, Card } from "@ojpp/ui";
 
 interface PolicyCardProps {
   id: string;
@@ -19,11 +19,8 @@ export function PolicyCard({
   status,
   contentPreview,
 }: PolicyCardProps) {
-  const statusVariant = status === "PUBLISHED"
-    ? "success"
-    : status === "DRAFT"
-      ? "warning"
-      : "default";
+  const statusVariant =
+    status === "PUBLISHED" ? "success" : status === "DRAFT" ? "warning" : "default";
 
   return (
     <a href={`/policy/${id}`} className="block transition-shadow hover:shadow-md">
@@ -44,9 +41,7 @@ export function PolicyCard({
           </div>
         )}
         <h3 className="mb-2 text-sm font-bold leading-snug">{title}</h3>
-        {contentPreview && (
-          <p className="line-clamp-2 text-xs text-gray-500">{contentPreview}</p>
-        )}
+        {contentPreview && <p className="line-clamp-2 text-xs text-gray-500">{contentPreview}</p>}
       </Card>
     </a>
   );

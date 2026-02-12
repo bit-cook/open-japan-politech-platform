@@ -1,6 +1,6 @@
 import { prisma } from "@ojpp/db";
-import { notFound } from "next/navigation";
 import { Badge, Card } from "@ojpp/ui";
+import { notFound } from "next/navigation";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { PartyChip } from "@/components/party-chip";
 
@@ -27,11 +27,8 @@ export default async function PolicyPage({ params }: Props) {
     notFound();
   }
 
-  const statusVariant = policy.status === "PUBLISHED"
-    ? "success"
-    : policy.status === "DRAFT"
-      ? "warning"
-      : "default";
+  const statusVariant =
+    policy.status === "PUBLISHED" ? "success" : policy.status === "DRAFT" ? "warning" : "default";
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-12">

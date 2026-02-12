@@ -6,7 +6,9 @@ export default function NotFound() {
       <Card>
         <div className="text-center">
           <h2 className="mb-2 text-2xl font-bold">404 - ページが見つかりません</h2>
-          <p className="mb-4 text-gray-600">お探しのページは存在しないか、移動した可能性があります。</p>
+          <p className="mb-4 text-gray-600">
+            お探しのページは存在しないか、移動した可能性があります。
+          </p>
           <a href="/" className="text-green-600 hover:underline">
             トップページに戻る
           </a>

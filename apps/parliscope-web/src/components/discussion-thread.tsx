@@ -33,9 +33,7 @@ export function DiscussionThread({ discussions }: { discussions: Discussion[] })
         return (
           <div key={d.id} className="border-l-2 border-gray-200 pl-4">
             <div className="flex items-center gap-2">
-              {stanceConfig && (
-                <Badge variant={stanceConfig.variant}>{stanceConfig.label}</Badge>
-              )}
+              {stanceConfig && <Badge variant={stanceConfig.variant}>{stanceConfig.label}</Badge>}
               <span className="text-xs text-gray-400">
                 {new Date(d.createdAt).toLocaleDateString("ja-JP")}
               </span>

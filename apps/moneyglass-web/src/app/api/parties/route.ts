@@ -1,5 +1,5 @@
-import { prisma } from "@ojpp/db";
 import { handleApiError, jsonResponse, serializeBigInt } from "@ojpp/api";
+import { prisma } from "@ojpp/db";
 
 export async function GET() {
   try {

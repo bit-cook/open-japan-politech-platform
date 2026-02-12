@@ -1,5 +1,5 @@
 import { prisma } from "@ojpp/db";
-import { Card, Badge } from "@ojpp/ui";
+import { Badge, Card } from "@ojpp/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +25,8 @@ export default async function ProposalsPage() {
     <div className="mx-auto max-w-7xl px-6 py-12">
       <h2 className="mb-2 text-3xl font-bold">政策変更提案</h2>
       <p className="mb-8 text-gray-600">
-        市民から寄せられた政策の改善提案一覧です。GitHubのPull Requestのように、政策への変更を提案できます。
+        市民から寄せられた政策の改善提案一覧です。GitHubのPull
+        Requestのように、政策への変更を提案できます。
       </p>
 
       <div className="mb-8 flex flex-wrap gap-3">

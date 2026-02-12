@@ -3,7 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "PolicyDiff - 全政党の政策を、差分で比較する",
-  description: "全政党のマニフェスト・政策をバージョン管理。AIエージェントが変更を追跡し、誰もが政策の違いと変遷を即座に把握できる。",
+  description:
+    "全政党のマニフェスト・政策をバージョン管理。AIエージェントが変更を追跡し、誰もが政策の違いと変遷を即座に把握できる。",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -16,12 +17,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <span className="text-green-600">Policy</span>Diff
             </a>
             <nav className="flex gap-6 text-sm">
-              <a href="/" className="hover:text-green-600">ダッシュボード</a>
-              <a href="/category/教育" className="hover:text-green-600">カテゴリ別</a>
-              <a href="/compare" className="hover:text-green-600">政党比較</a>
-              <a href="/proposals" className="hover:text-green-600">提案</a>
-              <a href="/api-docs" className="hover:text-green-600">API</a>
-              <a href="/about" className="hover:text-green-600">About</a>
+              <a href="/" className="hover:text-green-600">
+                ダッシュボード
+              </a>
+              <a href="/category/教育" className="hover:text-green-600">
+                カテゴリ別
+              </a>
+              <a href="/compare" className="hover:text-green-600">
+                政党比較
+              </a>
+              <a href="/proposals" className="hover:text-green-600">
+                提案
+              </a>
+              <a href="/api-docs" className="hover:text-green-600">
+                API
+              </a>
+              <a href="/about" className="hover:text-green-600">
+                About
+              </a>
             </nav>
           </div>
         </header>
