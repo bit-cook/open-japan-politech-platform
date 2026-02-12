@@ -5,9 +5,9 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
-    "ingest:finance": "tsx src/political-finance/ingest.ts",
-    "ingest:parliament": "tsx src/kokkai/ingest-sessions.ts && tsx src/kokkai/ingest-bills.ts",
-    "ingest:manifesto": "tsx src/manifesto/seed-policies.ts",
+    "ingest:finance": "dotenv -e ../../.env -- tsx src/political-finance/ingest.ts",
+    "ingest:parliament": "dotenv -e ../../.env -- tsx src/kokkai/ingest-sessions.ts && dotenv -e ../../.env -- tsx src/kokkai/ingest-bills.ts",
+    "ingest:manifesto": "dotenv -e ../../.env -- tsx src/manifesto/seed-policies.ts",
     "ingest:all": "pnpm ingest:finance && pnpm ingest:parliament && pnpm ingest:manifesto",
     "test": "vitest run"
   },
@@ -15,6 +15,7 @@
     "@ojpp/db": "workspace:*"
   },
   "devDependencies": {
+    "dotenv-cli": "^11.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
