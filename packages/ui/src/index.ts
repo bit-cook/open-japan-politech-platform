@@ -1,5 +1,11 @@
+export { AnimatedCounter } from "./animated-counter";
 export { Badge } from "./badge";
 export { Button } from "./button";
 export { Card } from "./card";
+export { DataTable } from "./data-table";
+export { GradientCard } from "./gradient-card";
+export { HeroSection } from "./hero-section";
+export { NavigationBar } from "./navigation-bar";
+export { Pagination } from "./pagination";
 export { Skeleton, SkeletonCard, SkeletonText } from "./skeleton";
 export { Stat } from "./stat";

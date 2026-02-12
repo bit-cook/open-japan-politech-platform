@@ -1,6 +1,7 @@
-import { Card, Stat } from "@ojpp/ui";
-import { formatCurrency, formatNumber } from "@/lib/format";
+import { Card, HeroSection } from "@ojpp/ui";
+import { formatCurrency } from "@/lib/format";
 import { DashboardCharts } from "./dashboard-charts";
+import { HeroStats } from "./hero-stats";
 
 interface StatsData {
   organizationCount: number;
@@ -57,66 +58,78 @@ export default async function Home() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12">
-      <section className="mb-12">
-        <h2 className="mb-2 text-3xl font-bold">政治資金ダッシュボード</h2>
-        <p className="mb-8 text-gray-600">全政党・全政治団体の資金の流れをリアルタイムで可視化</p>
+    <div>
+      <HeroSection
+        title="政治資金ダッシュボード"
+        subtitle="全政党・全政治団体の資金の流れをリアルタイムで可視化"
+        gradientFrom="from-blue-600"
+        gradientTo="to-indigo-700"
+      >
+        <HeroStats
+          organizationCount={stats.organizationCount}
+          reportCount={stats.reportCount}
+          totalIncome={stats.totalIncome}
+          totalExpenditure={stats.totalExpenditure}
+        />
+      </HeroSection>
 
-        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Stat label="登録団体数" value={formatNumber(stats.organizationCount)} />
-          <Stat label="報告書数" value={formatNumber(stats.reportCount)} />
-          <Stat label="総収入" value={formatCurrency(stats.totalIncome)} />
-          <Stat label="総支出" value={formatCurrency(stats.totalExpenditure)} />
-        </div>
-      </section>
+      <div className="mx-auto max-w-7xl px-6 py-12">
+        <section className="mb-12">
+          <h3 className="mb-4 text-xl font-bold">年度別収支推移</h3>
+          <Card hover>
+            <DashboardCharts yearlyStats={stats.yearlyStats} />
+          </Card>
+        </section>
 
-      <section className="mb-12">
-        <h3 className="mb-4 text-xl font-bold">年度別収支推移</h3>
-        <Card>
-          <DashboardCharts yearlyStats={stats.yearlyStats} />
-        </Card>
-      </section>
-
-      <section>
-        <h3 className="mb-4 text-xl font-bold">最新の報告書</h3>
-        <div className="overflow-hidden rounded-lg border bg-white">
-          <table className="w-full text-left text-sm">
-            <thead className="border-b bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 font-medium">団体名</th>
-                <th className="px-4 py-3 font-medium">政党</th>
-                <th className="px-4 py-3 font-medium">年度</th>
-                <th className="px-4 py-3 text-right font-medium">収入</th>
-                <th className="px-4 py-3 text-right font-medium">支出</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stats.recentReports.map((report) => (
-                <tr key={report.id} className="border-b last:border-0 hover:bg-gray-50">
-                  <td className="px-4 py-3">
-                    <a href={`/reports/${report.id}`} className="text-blue-600 hover:underline">
-                      {report.organization.name}
-                    </a>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className="inline-block rounded-full px-2 py-0.5 text-xs font-medium text-white"
-                      style={{ backgroundColor: report.organization.party?.color ?? "#6B7280" }}
-                    >
-                      {report.organization.party?.name ?? "-"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">{report.fiscalYear}年</td>
-                  <td className="px-4 py-3 text-right">{formatCurrency(report.totalIncome)}</td>
-                  <td className="px-4 py-3 text-right">
-                    {formatCurrency(report.totalExpenditure)}
-                  </td>
+        <section>
+          <h3 className="mb-4 text-xl font-bold">最新の報告書</h3>
+          <div className="overflow-x-auto rounded-xl border bg-white shadow-card">
+            <table className="w-full text-left text-sm">
+              <thead className="border-b bg-gray-50/80">
+                <tr>
+                  <th className="px-4 py-3 font-medium text-gray-600">団体名</th>
+                  <th className="px-4 py-3 font-medium text-gray-600">政党</th>
+                  <th className="px-4 py-3 font-medium text-gray-600">年度</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-600">収入</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-600">支出</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+              </thead>
+              <tbody>
+                {stats.recentReports.map((report) => (
+                  <tr
+                    key={report.id}
+                    className="border-b transition-colors last:border-0 hover:bg-blue-50/50"
+                  >
+                    <td className="px-4 py-3">
+                      <a
+                        href={`/reports/${report.id}`}
+                        className="font-medium text-blue-600 hover:underline"
+                      >
+                        {report.organization.name}
+                      </a>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium text-white"
+                        style={{ backgroundColor: report.organization.party?.color ?? "#6B7280" }}
+                      >
+                        {report.organization.party?.name ?? "-"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">{report.fiscalYear}年</td>
+                    <td className="px-4 py-3 text-right font-medium text-income">
+                      {formatCurrency(report.totalIncome)}
+                    </td>
+                    <td className="px-4 py-3 text-right font-medium text-expenditure">
+                      {formatCurrency(report.totalExpenditure)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,21 @@
 
 ---
 
+## 論文
+
+本プラットフォームの理論的基盤となる論文を [`paper/`](paper/) ディレクトリに収録しています。
+
+> **PoliTech：政党にも企業にもよらない政治のデジタル化——オープンソース・エージェントレディな政治テクノロジー基盤の国際比較分析**
+>
+> *PoliTech: Non-Partisan, Non-Corporate Digitalization of Politics — A Comparative Analysis of Open-Source, Agent-Ready Political Technology Infrastructure*
+
+GovTech（行政DX）とCivicTech（市民技術）の二分法では捉えきれない第三の領域——「PoliTech（政治技術）」を定義し、台湾（g0v/vTaiwan）、英国（mySociety）、米国（Code for America / FEC）、欧州（Decidim / CONSUL Democracy）、日本（チームみらい / Open Japan PoliTech Platform）の5地域を6軸比較フレームワーク（非党派性・非企業性・オープンソース度・制度的接合性・参加の包摂性・エージェントレディ度）で分析しています。
+
+- [paper.pdf](paper/paper.pdf) — PDF版
+- [paper.md](paper/paper.md) — Markdown版
+
+---
+
 ## なぜ今、PoliTechなのか
 
 政治は長く、政党と企業の専有物だった。政治資金の流れを追うには専門知識が必要だった。全政党の政策を比較するには膨大な時間がかかった。国会の法案を読み解くには法律の素養が求められた。
@@ -45,7 +60,7 @@
 
 ### MoneyGlass — 政治資金を、ガラスのように透明に
 
-全政党・全政治団体の資金の流れを可視化。収支報告書を構造化し、収入9カテゴリ・支出8カテゴリで分類。Rechartsによるインタラクティブなグラフとダッシュボード統計で、誰もが政治資金の実態にアクセスできる。
+全政党・全政治団体の資金の流れを可視化。収支報告書を構造化し、収入9カテゴリ・支出8カテゴリで分類。Rechartsによるインタラクティブなグラフ（グラデーション付き棒グラフ・ドーナツチャート）、AnimatedCounterによるダッシュボード統計、GradientCardによる政党別カードで、誰もが政治資金の実態にアクセスできる。
 
 | アプリ | ポート | 用途 |
 |---|---|---|
@@ -54,7 +69,7 @@
 
 ### PolicyDiff — 全政党の政策を、差分で比較する
 
-全政党のマニフェスト・政策を10カテゴリに分類し、政党間の比較を可能にする。Markdown形式の政策テキストをremark + remark-htmlでレンダリング。カテゴリ別・政党別のフィルタリングと、市民からの政策提案機能を実装。
+全15政党のマニフェスト・政策を10カテゴリに分類し、政党間の比較を可能にする。Markdown形式の政策テキストをremark + remark-htmlでレンダリング。カテゴリ別・政党別のフィルタリング、政党カラーチップによる直感的なUI、スナップスクロール対応の比較カード、市民からの政策提案機能を実装。
 
 | アプリ | ポート | 用途 |
 |---|---|---|
@@ -62,7 +77,7 @@
 
 ### ParliScope — 議会を、すべての人とエージェントに開く
 
-国会の会期・法案・議員・投票・討論データをAPI化。14会期分のデータを構造化し、法案のステータス追跡、議員の投票履歴分析が可能。
+国会の会期・法案・議員・投票・討論データをAPI化。14会期分のデータを構造化し、BillTimeline（法案ステータスのステップインジケーター）、VoteChart（投票結果のアニメーション棒グラフ）、議員カードのページネーション付き一覧で、法案追跡と議員分析が可能。
 
 | アプリ | ポート | 用途 |
 |---|---|---|
@@ -96,7 +111,7 @@
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                     PostgreSQL (Prisma 6)                       │
-│  21モデル │ 10 enum │ 47都道府県 │ 11政党 │ 政治資金・法案・政策  │
+│  21モデル │ 10 enum │ 47都道府県 │ 15政党 │ 政治資金・法案・政策  │
 └─────────────────────────────────────────────────────────────────┘
                             ▲
                             │
@@ -257,7 +272,7 @@ Prismaスキーマに21モデル・10 enumを定義。
 政治主体                    政治資金                      議会
 ┌──────────┐              ┌──────────────┐             ┌──────────────┐
 │  Party   │◄────────────►│  FundReport  │             │ DietSession  │
-│ (11政党)  │              │  (収支報告書)  │             │  (国会会期)   │
+│ (15政党)  │              │  (収支報告書)  │             │  (国会会期)   │
 └────┬─────┘              └──┬───────┬───┘             └──────┬───────┘
      │                       │       │                        │
      ▼                       ▼       ▼                        ▼
@@ -297,7 +312,8 @@ AIエージェント時代に、政党や企業が独占してきた政治プロ
 | Database | PostgreSQL (via Supabase / local) |
 | ORM | Prisma 6 |
 | Styling | Tailwind CSS v4 |
-| Charts | Recharts (MoneyGlass) |
+| Design System | @ojpp/ui — カスタムテーマ、アニメーション、11コンポーネント |
+| Charts | Recharts (全3アプリ) |
 | Markdown | remark + remark-html (PolicyDiff) |
 | Package Manager | pnpm 10 (monorepo with workspaces) |
 | Linter/Formatter | Biome 2.3 |
@@ -330,7 +346,7 @@ open-japan-politech-platform/
 │   │       └── sessions/     #   会期一覧・詳細
 │   └── parliscope-admin/     # ParliScope 管理画面 (:3004)
 ├── packages/
-│   ├── ui/                   # @ojpp/ui — Button, Card, Badge, Stat, Skeleton
+│   ├── ui/                   # @ojpp/ui — 11コンポーネント + デザインシステム (theme.css)
 │   ├── db/                   # @ojpp/db — Prisma スキーマ (21モデル / 10 enum)
 │   ├── api/                  # @ojpp/api — ページネーション, エラー, CORS, BigInt変換
 │   └── ingestion/            # @ojpp/ingestion — 政治資金・議会・マニフェスト取り込み
@@ -348,7 +364,7 @@ open-japan-politech-platform/
 
 | プロジェクト | 関係 |
 |---|---|
-| チームみらい（まる見え政治資金等） | 技術的参考。ただし政党紐づきのため、本プラットフォームは全政党対応の汎用版 |
+| チームみらい（まる見え政治資金等） | 技術的参考。ただし政党紐づきのため、本プラットフォームは全15政党対応の非党派的・汎用版。デザイン品質でも同等以上を目指す |
 | DD2030（Polimoney等） | 方向性は近い。本プラットフォームはエージェントファースト設計を追加 |
 | g0v / vTaiwan | 台湾モデルの日本版。市民社会主導の非党派アプローチを踏襲 |
 | Decidim / Consul | 欧州の参加型民主主義基盤。モジュラー設計を参考 |
@@ -359,11 +375,16 @@ open-japan-politech-platform/
 ## ロードマップ
 
 - [x] Prismaスキーマ定義（21モデル・10 enum）
-- [x] シードデータ（47都道府県・11政党）
+- [x] シードデータ（47都道府県・15政党 — チームみらい、NHK党、教育無償化を実現する会、沖縄社会大衆党を追加）
 - [x] 3プロダクトのMVP実装（API + フロントエンド）
 - [x] データ取り込みパイプライン（政治資金・議会・マニフェスト）
 - [x] CI/CD パイプライン
 - [x] ユニットテスト（33テスト）
+- [x] デザインシステム構築（@ojpp/ui — theme.css、11コンポーネント、アニメーション）
+- [x] 3アプリのグラフィカルデザイン刷新（HeroSection、GradientCard、NavigationBar）
+- [x] インタラクティブチャート拡充（Recharts全3アプリ対応、AnimatedCounter）
+- [x] 法案タイムライン・投票チャート・ページネーション
+- [x] 学術論文（PoliTech 5地域比較分析）
 - [ ] 認証・認可（Supabase Auth）
 - [ ] AIエージェント認証（APIキー・MCP）
 - [ ] GraphQL API

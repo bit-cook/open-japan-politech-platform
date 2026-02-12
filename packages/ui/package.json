@@ -6,7 +6,8 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./*": "./src/*.tsx"
+    "./*": "./src/*.tsx",
+    "./theme.css": "./src/theme.css"
   },
   "dependencies": {
     "react": "^19.0.0"

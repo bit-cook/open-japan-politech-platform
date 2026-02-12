@@ -1,5 +1,10 @@
+import { NavigationBar } from "@ojpp/ui";
 import type { Metadata } from "next";
+import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], variable: "--font-noto-sans-jp" });
 
 export const metadata: Metadata = {
   title: "PolicyDiff - 全政党の政策を、差分で比較する",
@@ -7,37 +12,25 @@ export const metadata: Metadata = {
     "全政党のマニフェスト・政策をバージョン管理。AIエージェントが変更を追跡し、誰もが政策の違いと変遷を即座に把握できる。",
 };
 
+const NAV_ITEMS = [
+  { href: "/", label: "ダッシュボード" },
+  { href: "/category/教育", label: "カテゴリ別" },
+  { href: "/compare", label: "政党比較" },
+  { href: "/proposals", label: "提案" },
+  { href: "/api-docs", label: "API" },
+  { href: "/about", label: "About" },
+];
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ja">
-      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-        <header className="border-b bg-white">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <a href="/" className="text-xl font-bold">
-              <span className="text-green-600">Policy</span>Diff
-            </a>
-            <nav className="flex gap-6 text-sm">
-              <a href="/" className="hover:text-green-600">
-                ダッシュボード
-              </a>
-              <a href="/category/教育" className="hover:text-green-600">
-                カテゴリ別
-              </a>
-              <a href="/compare" className="hover:text-green-600">
-                政党比較
-              </a>
-              <a href="/proposals" className="hover:text-green-600">
-                提案
-              </a>
-              <a href="/api-docs" className="hover:text-green-600">
-                API
-              </a>
-              <a href="/about" className="hover:text-green-600">
-                About
-              </a>
-            </nav>
-          </div>
-        </header>
+    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable}`}>
+      <body className="min-h-screen bg-gray-50 font-sans text-gray-900 antialiased">
+        <NavigationBar
+          brand="PolicyDiff"
+          brandColor="text-green-600"
+          items={NAV_ITEMS}
+          accentColor="hover:text-green-600"
+        />
         <main>{children}</main>
         <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
           <p>AIエージェント時代の政策比較 — あなたのエージェントが全政党の政策を常時分析する</p>

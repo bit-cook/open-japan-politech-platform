@@ -89,7 +89,7 @@ export default function ComparePage() {
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded-full border px-3 py-1 text-sm transition-colors ${
+              className={`rounded-full border px-3 py-1 text-sm transition-all duration-200 hover:scale-[1.05] hover:shadow-sm ${
                 selectedCategory === cat
                   ? "border-green-600 bg-green-50 font-medium text-green-700"
                   : "hover:bg-gray-50"
@@ -109,7 +109,7 @@ export default function ComparePage() {
               key={party.id}
               type="button"
               onClick={() => toggleParty(party.name)}
-              className={`inline-flex items-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors ${
+              className={`inline-flex items-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-all duration-200 hover:scale-[1.05] hover:shadow-sm ${
                 selectedParties.includes(party.name) ? "bg-opacity-10" : "opacity-40"
               }`}
               style={{
@@ -139,7 +139,7 @@ export default function ComparePage() {
       ) : policies.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {policies.map((policy) => (
-            <Card key={policy.id} padding="md" className="flex flex-col">
+            <Card key={policy.id} padding="md" hover className="flex flex-col">
               <div className="mb-3 flex items-center gap-2">
                 {policy.party?.color && (
                   <span
@@ -168,9 +168,9 @@ export default function ComparePage() {
               <div className="mt-4 border-t pt-3">
                 <a
                   href={`/policy/${policy.id}`}
-                  className="text-sm font-medium text-green-600 hover:text-green-700"
+                  className="text-sm font-medium text-green-600 transition-colors hover:text-green-700"
                 >
-                  詳細を見る
+                  詳細を見る →
                 </a>
               </div>
             </Card>

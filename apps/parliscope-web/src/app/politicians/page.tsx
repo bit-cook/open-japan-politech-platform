@@ -1,5 +1,5 @@
 import { prisma } from "@ojpp/db";
-import { Badge, Card } from "@ojpp/ui";
+import { Badge, Card, Pagination } from "@ojpp/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -119,9 +119,9 @@ export default async function PoliticiansPage({ searchParams }: PageProps) {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {politicians.map((pol) => (
           <a key={pol.id} href={`/politicians/${pol.id}`}>
-            <Card padding="sm" className="transition-colors hover:border-purple-300">
+            <Card padding="sm" hover>
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-sm font-bold text-purple-600">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-sm font-bold text-white">
                   {pol.name.charAt(0)}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -142,29 +142,12 @@ export default async function PoliticiansPage({ searchParams }: PageProps) {
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="mt-8 flex items-center justify-center gap-2">
-          {page > 1 && (
-            <a
-              href={`/politicians?party=${params.party ?? ""}&chamber=${params.chamber ?? ""}&page=${page - 1}`}
-              className="rounded bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200"
-            >
-              前へ
-            </a>
-          )}
-          <span className="px-4 py-2 text-sm text-gray-600">
-            {page} / {totalPages}
-          </span>
-          {page < totalPages && (
-            <a
-              href={`/politicians?party=${params.party ?? ""}&chamber=${params.chamber ?? ""}&page=${page + 1}`}
-              className="rounded bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200"
-            >
-              次へ
-            </a>
-          )}
-        </div>
-      )}
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        baseHref={`/politicians?party=${params.party ?? ""}&chamber=${params.chamber ?? ""}`}
+        className="mt-8"
+      />
     </div>
   );
 }

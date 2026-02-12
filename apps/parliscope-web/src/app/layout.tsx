@@ -1,5 +1,10 @@
+import { NavigationBar } from "@ojpp/ui";
 import type { Metadata } from "next";
+import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], variable: "--font-noto-sans-jp" });
 
 export const metadata: Metadata = {
   title: "ParliScope - 議会を、すべての人とエージェントに開く",
@@ -18,25 +23,17 @@ const NAV_ITEMS = [
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ja">
-      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-        <header className="border-b bg-white">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <a href="/" className="text-xl font-bold">
-              <span className="text-purple-600">Parli</span>Scope
-            </a>
-            <nav className="flex gap-6 text-sm">
-              {NAV_ITEMS.map((item) => (
-                <a key={item.href} href={item.href} className="hover:text-purple-600">
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </header>
+    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable}`}>
+      <body className="min-h-screen bg-gray-50 font-sans text-gray-900 antialiased">
+        <NavigationBar
+          brand="ParliScope"
+          brandColor="text-purple-600"
+          items={NAV_ITEMS}
+          accentColor="hover:text-purple-600"
+        />
         <main>{children}</main>
         <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
-          <p>AIエージェント時代の議会監視 -- エージェントが全法案を読み、あなたに届ける</p>
+          <p>AIエージェント時代の議会監視 — エージェントが全法案を読み、あなたに届ける</p>
           <p className="mt-1">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
           <p className="mt-1">Open Japan PoliTech Platform | AGPL-3.0</p>
         </footer>

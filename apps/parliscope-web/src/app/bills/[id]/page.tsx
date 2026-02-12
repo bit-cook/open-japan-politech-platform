@@ -2,6 +2,7 @@ import { prisma } from "@ojpp/db";
 import { Card } from "@ojpp/ui";
 import { notFound } from "next/navigation";
 import { BillStatusBadge } from "@/components/bill-status-badge";
+import { BillTimeline } from "@/components/bill-timeline";
 import { DiscussionThread } from "@/components/discussion-thread";
 
 export const dynamic = "force-dynamic";
@@ -61,19 +62,22 @@ export default async function BillDetailPage({ params }: PageProps) {
             )}
           </div>
           <h2 className="text-2xl font-bold">{bill.title}</h2>
+          <div className="mt-3">
+            <BillTimeline currentStatus={bill.status} />
+          </div>
         </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           {bill.summary && (
-            <Card>
+            <Card hover>
               <h3 className="mb-2 font-semibold">概要</h3>
               <p className="text-gray-700">{bill.summary}</p>
             </Card>
           )}
 
-          <Card>
+          <Card hover>
             <h3 className="mb-4 font-semibold">投票結果</h3>
             <VoteChart votes={voteCounts} />
             {bill.votes.length > 0 && (
@@ -120,14 +124,14 @@ export default async function BillDetailPage({ params }: PageProps) {
             )}
           </Card>
 
-          <Card>
+          <Card hover>
             <h3 className="mb-4 font-semibold">議論</h3>
             <DiscussionThread discussions={bill.discussions} />
           </Card>
         </div>
 
         <div className="space-y-6">
-          <Card>
+          <Card hover>
             <h3 className="mb-3 font-semibold">基本情報</h3>
             <dl className="space-y-2 text-sm">
               <div>

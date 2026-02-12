@@ -27,14 +27,14 @@ export function VoteChart({ votes }: { votes: VoteCount }) {
           item.count > 0 ? (
             <div
               key={item.label}
-              className={`${item.color} transition-all`}
+              className={`${item.color} transition-all duration-500`}
               style={{ width: `${(item.count / total) * 100}%` }}
               title={`${item.label}: ${item.count}`}
             />
           ) : null,
         )}
       </div>
-      <div className="flex flex-wrap gap-4 text-sm">
+      <div className="flex flex-wrap gap-4 text-sm animate-fade-in">
         {items.map((item) => (
           <div key={item.label} className="flex items-center gap-1.5">
             <div className={`h-3 w-3 rounded-full ${item.color}`} />

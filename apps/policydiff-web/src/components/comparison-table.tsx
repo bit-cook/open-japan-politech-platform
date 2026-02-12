@@ -19,16 +19,21 @@ interface ComparisonTableProps {
 export function ComparisonTable({ policies, category }: ComparisonTableProps) {
   if (policies.length === 0) {
     return (
-      <div className="rounded-lg border bg-white p-8 text-center text-gray-500">
+      <div className="rounded-xl border bg-white p-8 text-center text-gray-500 shadow-card">
         <p>「{category}」に該当する政策がありません。</p>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-3">
       {policies.map((policy) => (
-        <Card key={policy.id} padding="md" className="flex flex-col">
+        <Card
+          key={policy.id}
+          padding="md"
+          hover
+          className="flex min-w-[280px] snap-start flex-col md:min-w-0"
+        >
           <div className="mb-3 flex items-center gap-2">
             {policy.party?.color && (
               <span
@@ -47,9 +52,9 @@ export function ComparisonTable({ policies, category }: ComparisonTableProps) {
           <div className="mt-4 border-t pt-3">
             <a
               href={`/policy/${policy.id}`}
-              className="text-sm font-medium text-green-600 hover:text-green-700"
+              className="text-sm font-medium text-green-600 transition-colors hover:text-green-700"
             >
-              詳細を見る
+              詳細を見る →
             </a>
           </div>
         </Card>

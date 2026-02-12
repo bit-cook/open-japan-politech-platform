@@ -105,27 +105,32 @@ export default async function ReportDetailPage({ params }: { params: Promise<{ i
       <div className="mb-8 grid gap-8 lg:grid-cols-2">
         <section>
           <h3 className="mb-4 text-xl font-bold">収入内訳</h3>
-          <Card>
+          <Card hover>
             <ReportCharts type="income" data={incomeData} />
           </Card>
-          <div className="mt-4 overflow-hidden rounded-lg border bg-white">
+          <div className="mt-4 overflow-hidden rounded-xl border bg-white shadow-card">
             <table className="w-full text-left text-sm">
-              <thead className="border-b bg-gray-50">
+              <thead className="border-b bg-gray-50/80">
                 <tr>
-                  <th className="px-4 py-3 font-medium">区分</th>
-                  <th className="px-4 py-3 text-right font-medium">金額</th>
+                  <th className="px-4 py-3 font-medium text-gray-600">区分</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-600">金額</th>
                 </tr>
               </thead>
               <tbody>
                 {report.incomes.map((income) => (
-                  <tr key={income.id} className="border-b last:border-0">
+                  <tr
+                    key={income.id}
+                    className="border-b transition-colors last:border-0 hover:bg-blue-50/50"
+                  >
                     <td className="px-4 py-3">
                       {INCOME_CATEGORY_LABELS[income.category] ?? income.category}
                       {income.source && (
                         <span className="ml-2 text-xs text-gray-400">({income.source})</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-right">{formatCurrency(income.amount)}</td>
+                    <td className="px-4 py-3 text-right font-medium text-income">
+                      {formatCurrency(income.amount)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -135,24 +140,29 @@ export default async function ReportDetailPage({ params }: { params: Promise<{ i
 
         <section>
           <h3 className="mb-4 text-xl font-bold">支出内訳</h3>
-          <Card>
+          <Card hover>
             <ReportCharts type="expenditure" data={expenditureData} />
           </Card>
-          <div className="mt-4 overflow-hidden rounded-lg border bg-white">
+          <div className="mt-4 overflow-hidden rounded-xl border bg-white shadow-card">
             <table className="w-full text-left text-sm">
-              <thead className="border-b bg-gray-50">
+              <thead className="border-b bg-gray-50/80">
                 <tr>
-                  <th className="px-4 py-3 font-medium">区分</th>
-                  <th className="px-4 py-3 text-right font-medium">金額</th>
+                  <th className="px-4 py-3 font-medium text-gray-600">区分</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-600">金額</th>
                 </tr>
               </thead>
               <tbody>
                 {report.expenditures.map((exp) => (
-                  <tr key={exp.id} className="border-b last:border-0">
+                  <tr
+                    key={exp.id}
+                    className="border-b transition-colors last:border-0 hover:bg-red-50/50"
+                  >
                     <td className="px-4 py-3">
                       {EXPENDITURE_CATEGORY_LABELS[exp.category] ?? exp.category}
                     </td>
-                    <td className="px-4 py-3 text-right">{formatCurrency(exp.amount)}</td>
+                    <td className="px-4 py-3 text-right font-medium text-expenditure">
+                      {formatCurrency(exp.amount)}
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -94,46 +94,77 @@ export default async function PartyDetailPage({ params }: { params: Promise<{ id
     totalExpenditure += Number(r.totalExpenditure);
   }
 
+  const partyColor = party.color ?? "#6B7280";
+
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12">
-      <div className="mb-8 flex items-center gap-4">
+    <div>
+      {/* Party color gradient banner */}
+      <section
+        className="relative overflow-hidden py-12 text-white"
+        style={{
+          background: `linear-gradient(135deg, ${partyColor}, ${partyColor}cc)`,
+        }}
+      >
         <div
-          className="h-6 w-6 rounded-full"
-          style={{ backgroundColor: party.color ?? "#6B7280" }}
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
         />
-        <h2 className="text-3xl font-bold">{party.name}</h2>
-      </div>
-
-      <div className="mb-8 grid gap-4 sm:grid-cols-3">
-        <Stat label="所属団体数" value={String(party.organizations.length)} />
-        <Stat label="総収入（全年度合計）" value={formatCurrency(totalIncome)} />
-        <Stat label="総支出（全年度合計）" value={formatCurrency(totalExpenditure)} />
-      </div>
-
-      {yearlyStats.length > 0 && (
-        <section className="mb-8">
-          <h3 className="mb-4 text-xl font-bold">年度別資金推移</h3>
-          <Card>
-            <PartyDetailCharts yearlyStats={yearlyStats} />
-          </Card>
-        </section>
-      )}
-
-      <section>
-        <h3 className="mb-4 text-xl font-bold">所属団体一覧</h3>
-        <div className="grid gap-4 md:grid-cols-2">
-          {party.organizations.map((org) => (
-            <a key={org.id} href={`/organizations/${org.id}`}>
-              <Card className="transition-shadow hover:shadow-md">
-                <h4 className="font-semibold">{org.name}</h4>
-                <p className="mt-1 text-sm text-gray-500">
-                  {ORG_TYPE_LABELS[org.type] ?? org.type}
-                </p>
-              </Card>
+        <div className="relative mx-auto max-w-7xl px-6">
+          <div className="flex items-center gap-4">
+            <div
+              className="h-8 w-8 rounded-full border-2 border-white/50"
+              style={{ backgroundColor: partyColor }}
+            />
+            <h2 className="text-4xl font-bold tracking-tight animate-fade-in">{party.name}</h2>
+          </div>
+          {party.website && (
+            <a
+              href={party.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block text-sm text-white/70 hover:text-white/90"
+            >
+              {party.website}
             </a>
-          ))}
+          )}
         </div>
       </section>
+
+      <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="mb-8 grid gap-4 sm:grid-cols-3">
+          <Stat label="所属団体数" value={String(party.organizations.length)} />
+          <Stat label="総収入（全年度合計）" value={formatCurrency(totalIncome)} />
+          <Stat label="総支出（全年度合計）" value={formatCurrency(totalExpenditure)} />
+        </div>
+
+        {yearlyStats.length > 0 && (
+          <section className="mb-8">
+            <h3 className="mb-4 text-xl font-bold">年度別資金推移</h3>
+            <Card hover>
+              <PartyDetailCharts yearlyStats={yearlyStats} />
+            </Card>
+          </section>
+        )}
+
+        <section>
+          <h3 className="mb-4 text-xl font-bold">所属団体一覧</h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            {party.organizations.map((org) => (
+              <a key={org.id} href={`/organizations/${org.id}`}>
+                <Card hover>
+                  <h4 className="font-semibold">{org.name}</h4>
+                  <p className="mt-1 text-sm text-gray-500">
+                    {ORG_TYPE_LABELS[org.type] ?? org.type}
+                  </p>
+                </Card>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
