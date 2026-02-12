@@ -17,7 +17,7 @@ export function HeroSection({
 }: HeroSectionProps) {
   return (
     <section
-      className={`relative overflow-hidden bg-gradient-to-br ${gradientFrom} ${gradientTo} py-16 text-white`}
+      className={`relative overflow-hidden bg-gradient-to-br ${gradientFrom} ${gradientTo} py-16 pb-20 text-white`}
     >
       {/* Dot grid background */}
       <div

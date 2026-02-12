@@ -1,12 +1,16 @@
-# Open Japan PoliTech Platform
+# Open Japan PoliTech Platform v0.1
 
 [![CI](https://github.com/ochyai/open-japan-politech-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/ochyai/open-japan-politech-platform/actions/workflows/ci.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.1-orange.svg)](#)
 [![Node.js](https://img.shields.io/badge/Node.js-22%2B-339933?logo=node.js)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-10%2B-F69220?logo=pnpm)](https://pnpm.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 
 > **AIエージェント時代の政治インフラ — 政党にも企業にもよらない、完全オープンな政治テクノロジー基盤**
+
+> [!CAUTION]
+> **v0.1 はデモ版です。** 現在のデータにはサンプル・架空データが含まれています。詳細は[データの性質と注意事項](#データの性質と注意事項)を参照してください。
 
 ---
 
@@ -258,6 +262,27 @@ curl http://localhost:3000/api/organizations?limit=2
 | 国会会議録 | [国会会議録API](https://kokkai.ndl.go.jp/) (kokkai.ndl.go.jp) | CC BY 4.0 | `pnpm ingest:parliament` |
 | 法案データ | [SmartNews SMRI](https://github.com/smartnews-smri) (GitHub) | MIT | `pnpm ingest:parliament` |
 | マニフェスト | 各政党公式サイト、早稲田大学 #くらべてえらぶ | 手動キュレーション | `pnpm ingest:manifesto` |
+
+---
+
+## データの性質と注意事項
+
+> [!WARNING]
+> v0.1 のデータにはサンプル・架空データが含まれています。プロダクション利用前に実データソースへの接続が必要です。
+
+| データ種別 | 性質 | 詳細 |
+|---|---|---|
+| **政党マスタ** | 実データ | 実在する15政党（名称・カラー・設立日・公式サイト） |
+| **都道府県** | 実データ | 47都道府県コード |
+| **国会会期** | 実データ | 第200〜213回（2019〜2024年）の実際の日程 |
+| **議員名** | 実データ | 実在する国会議員40名（氏名・所属・選挙区） |
+| **法案** | 実在+架空混在 | 31件中、大半は実在法案（所得税法改正、GX推進法等）だが一部に架空法案を含む |
+| **政治資金** | **架空データ** | 疑似乱数（seededRandom）で生成。金額規模は現実を参考にしているが、収支明細は全て架空 |
+| **政治団体** | **架空データ** | 「{党名}本部」「{党短名}政策研究会」のテンプレート生成。実在の個別団体名ではない |
+| **政策マニフェスト** | **デモデータ** | 各党の公式マニフェストを参考に作成したデモ用テキスト。公式の政策文書ではない |
+| **投票記録** | **架空データ** | 議員と法案の関連付けはサンプルデータ |
+
+**データセット**: 生成に使用したソースデータは [`data/`](data/) ディレクトリに格納しています。
 
 ---
 

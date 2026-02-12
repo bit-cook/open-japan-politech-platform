@@ -30,11 +30,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           items={NAV_ITEMS}
           accentColor="hover:text-blue-600"
         />
+        <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 text-center text-xs text-amber-800">
+          v0.1 デモ版 —
+          政治資金データは疑似乱数で生成されたサンプルデータです。実際の収支報告書とは異なります。
+        </div>
         <main>{children}</main>
         <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
           <p>AIエージェント時代の政治資金監視 — 人間が見ていなくても、エージェントが見ている</p>
           <p className="mt-1">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
-          <p className="mt-1">Open Japan PoliTech Platform | AGPL-3.0</p>
+          <p className="mt-1">Open Japan PoliTech Platform v0.1 | AGPL-3.0</p>
         </footer>
       </body>
     </html>

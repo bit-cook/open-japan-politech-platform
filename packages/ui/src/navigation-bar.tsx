@@ -40,13 +40,9 @@ export function NavigationBar({
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex gap-6 text-sm">
+        <nav className="hidden items-center gap-6 text-sm md:flex">
           {items.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={`transition-colors hover:${accentColor}`}
-            >
+            <a key={item.href} href={item.href} className={`transition-colors ${accentColor}`}>
               {item.label}
             </a>
           ))}
