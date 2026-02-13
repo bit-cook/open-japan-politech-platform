@@ -1,6 +1,6 @@
 import { Badge, Card, ScrollReveal, FadeIn } from "@ojpp/ui";
 import { notFound } from "next/navigation";
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, getBaseUrl } from "@/lib/format";
 
 const ORG_TYPE_LABELS: Record<string, string> = {
   PARTY_BRANCH: "政党支部",
@@ -29,7 +29,7 @@ interface OrgDetail {
 }
 
 async function getOrganization(id: string): Promise<OrgDetail | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/organizations/${id}`, { cache: "no-store" });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error("Failed to fetch organization");

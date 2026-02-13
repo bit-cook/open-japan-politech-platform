@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, getBaseUrl } from "@/lib/format";
 import { DashboardCharts } from "./dashboard-charts";
 import { HeroStats } from "./hero-stats";
 
@@ -26,7 +26,7 @@ interface StatsData {
 }
 
 async function getStats(): Promise<StatsData> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/stats`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch stats");
   return res.json();

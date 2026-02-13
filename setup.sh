@@ -705,8 +705,69 @@ step_pct
 if run_spin "🌱🎌 初期データをたっぷり投入！(15政党・47都道府県・713議員) ﾄﾞｻﾄﾞｻ！" pnpm db:seed; then :
 else wrn "スキップ（もうデータ入ってるみたい 👌）"; fi
 
-if run_spin "📊🏛️ 政治データをごっそり取り込み！(資金・議会・政策・文化・社保) ﾊﾞﾘﾊﾞﾘ！" pnpm ingest:all; then :
-else wrn "スキップ（もうデータ入ってるみたい 👌）"; fi
+# データ取り込み — 個別スクリプトごとにバキバキ進捗表示 💥
+INGEST_SCRIPTS=(
+  "ingest:prefectures|🗾|都道府県マスタ|47都道府県"
+  "ingest:finance|💰|政治資金（基本）|66件の報告書"
+  "ingest:real-finance|💴|政治資金（実データ）|13政党×10年分"
+  "ingest:parliament|🏛️|国会会期・議案|21会期+90法案"
+  "ingest:real-bills|📜|実法案データ|第210〜220回国会"
+  "ingest:manifesto|📋|政党マニフェスト|130以上の政策"
+  "ingest:elections|🗳️|選挙結果|衆参10選挙分"
+  "ingest:councillors|👔|参議院議員|247名の議員"
+  "ingest:representatives|🎩|衆議院議員|465名の議員"
+  "ingest:culture|🎨|文化政策・予算|8年分+29事業"
+  "ingest:social|🏥|社会保障・福祉|24制度+47都道府県"
+)
+_ig_total=${#INGEST_SCRIPTS[@]}
+_ig_done=0
+_ig_fail=0
+
+echo ""
+echo -e "  ${HOT}${B}╔══════════════════════════════════════════════════════════╗${R}"
+echo -e "  ${HOT}${B}║${R}  ${GOLD}${B}📊🏛️ 政治データ大量取り込みモード ﾊﾞﾘﾊﾞﾘ！${R}           ${HOT}${B}║${R}"
+echo -e "  ${HOT}${B}║${R}  ${GRAY}全${_ig_total}ステップ — 政党・議員・選挙・政策・予算をごっそり${R}  ${HOT}${B}║${R}"
+echo -e "  ${HOT}${B}╚══════════════════════════════════════════════════════════╝${R}"
+echo ""
+
+for _ig_entry in "${INGEST_SCRIPTS[@]}"; do
+  IFS='|' read -r _ig_cmd _ig_icon _ig_name _ig_detail <<< "$_ig_entry"
+  _ig_done=$((_ig_done + 1))
+
+  # プログレスバー生成
+  _ig_pct=$((_ig_done * 100 / _ig_total))
+  _ig_bar_len=20
+  _ig_filled=$((_ig_done * _ig_bar_len / _ig_total))
+  _ig_empty=$((_ig_bar_len - _ig_filled))
+  _ig_bar=""
+  for ((i=0; i<_ig_filled; i++)); do _ig_bar+="█"; done
+  for ((i=0; i<_ig_empty; i++)); do _ig_bar+="░"; done
+
+  # ステップヘッダーを表示
+  _ig_col="${RAINBOW_HUES[$((_ig_done % ${#RAINBOW_HUES[@]}))]}"
+  printf "  ${DGRAY}│${R}  \033[38;5;%sm${B}[%2d/%d]${R} %s ${B}%s${R} ${GRAY}— %s${R}\n" \
+    "$_ig_col" "$_ig_done" "$_ig_total" "$_ig_icon" "$_ig_name" "$_ig_detail"
+
+  if run_spin "      ↳ ${_ig_icon} ${_ig_name} を取り込み中..." pnpm "${_ig_cmd}"; then
+    printf "  ${DGRAY}│${R}  ${GRAY}[%s] %d%%${R}\n" "$_ig_bar" "$_ig_pct"
+  else
+    printf "  ${DGRAY}│${R}  ${RED}↳ スキップ${R} ${GRAY}(既にデータあり or エラー)${R}\n"
+    _ig_fail=$((_ig_fail + 1))
+  fi
+done
+
+echo ""
+if [ "$_ig_fail" -eq 0 ]; then
+  echo -e "  ${GRN}${B}╔══════════════════════════════════════════════════════════╗${R}"
+  echo -e "  ${GRN}${B}║${R}  ${LIME}${B}🎉✨ 全${_ig_total}ステップ完了！日本の政治データ、完全制覇！${R}  ${GRN}${B}║${R}"
+  echo -e "  ${GRN}${B}║${R}  ${GRAY}  政党・議員・選挙・政策・予算すべて投入済み ﾊﾞｯﾁﾘ！${R}  ${GRN}${B}║${R}"
+  echo -e "  ${GRN}${B}╚══════════════════════════════════════════════════════════╝${R}"
+else
+  echo -e "  ${ORNG}${B}╔══════════════════════════════════════════════════════════╗${R}"
+  echo -e "  ${ORNG}${B}║${R}  ${GOLD}📊 $((_ig_total - _ig_fail))/${_ig_total} 成功 ${GRAY}(${_ig_fail}件スキップ — 問題なし)${R}      ${ORNG}${B}║${R}"
+  echo -e "  ${ORNG}${B}╚══════════════════════════════════════════════════════════╝${R}"
+fi
+echo ""
 step_pct
 
 # =============================================================================

@@ -1,6 +1,6 @@
 import { Badge, Stat, Card, ScrollReveal, FadeIn } from "@ojpp/ui";
 import { notFound } from "next/navigation";
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, getBaseUrl } from "@/lib/format";
 import { ReportCharts } from "./report-charts";
 
 const INCOME_CATEGORY_LABELS: Record<string, string> = {
@@ -56,7 +56,7 @@ interface ReportDetail {
 }
 
 async function getReport(id: string): Promise<ReportDetail | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/reports/${id}`, { cache: "no-store" });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error("Failed to fetch report");

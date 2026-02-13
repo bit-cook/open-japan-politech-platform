@@ -2,6 +2,13 @@
  * 通貨・数値フォーマットユーティリティ
  */
 
+/** サーバーコンポーネントから自身のAPIを呼ぶためのベースURL */
+export function getBaseUrl(): string {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+}
+
 const formatter = new Intl.NumberFormat("ja-JP");
 
 export function formatCurrency(value: string | number | bigint): string {

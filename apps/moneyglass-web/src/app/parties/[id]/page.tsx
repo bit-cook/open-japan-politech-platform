@@ -1,6 +1,6 @@
 import { Card, Stat, ScrollReveal, StaggerGrid, StaggerItem } from "@ojpp/ui";
 import { notFound } from "next/navigation";
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, getBaseUrl } from "@/lib/format";
 import { PartyDetailCharts } from "./party-detail-charts";
 
 interface PartyDetail {
@@ -23,7 +23,7 @@ interface PartyDetail {
 }
 
 async function getParty(id: string): Promise<PartyDetail | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/organizations?party=${id}&limit=100`, {
     cache: "no-store",
   });
@@ -49,7 +49,7 @@ async function getParty(id: string): Promise<PartyDetail | null> {
 }
 
 async function getPartyReports(partyId: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/reports?limit=100`, { cache: "no-store" });
   if (!res.ok) return [];
   const result = await res.json();

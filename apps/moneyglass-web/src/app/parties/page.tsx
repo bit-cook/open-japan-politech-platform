@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, getBaseUrl } from "@/lib/format";
 import { PartyCards } from "./party-cards";
 
 interface PartyData {
@@ -12,7 +12,7 @@ interface PartyData {
 }
 
 async function getParties(): Promise<PartyData[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/parties`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch parties");
   return res.json();
