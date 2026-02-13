@@ -41,7 +41,7 @@ export function ServiceCard({ service, kpis, heroValue, heroSuffix, heroLabel }:
 
         {/* Hero stat */}
         {heroValue !== undefined && (
-          <div className="mt-4">
+          <div className="mt-4 min-w-0 overflow-hidden">
             <p
               className="kpi-value number-glow text-4xl font-bold sm:text-5xl"
               style={{ color: service.color }}

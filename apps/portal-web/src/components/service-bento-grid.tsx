@@ -9,19 +9,40 @@ interface ServiceBentoGridProps {
   stats: PortalStats;
 }
 
+/** bigint の円額を適切な日本語単位（万/億/兆）に変換 */
+function formatYen(value: bigint): { num: number; suffix: string } {
+  const n = Number(value);
+  if (n >= 1_000_000_000_000) {
+    // 兆 (1兆 = 10^12)
+    return { num: Math.round(n / 1_000_000_000_000), suffix: "兆" };
+  }
+  if (n >= 100_000_000) {
+    // 億 (1億 = 10^8)
+    return { num: Math.round(n / 100_000_000), suffix: "億" };
+  }
+  if (n >= 10_000) {
+    // 万 (1万 = 10^4)
+    return { num: Math.round(n / 10_000), suffix: "万" };
+  }
+  return { num: n, suffix: "" };
+}
+
 function buildCardData(serviceId: string, stats: PortalStats) {
   switch (serviceId) {
-    case "moneyglass":
+    case "moneyglass": {
+      const income = formatYen(stats.totalIncome);
+      const expenditure = formatYen(stats.totalExpenditure);
       return {
-        heroValue: Number(stats.totalIncome / 10000n),
-        heroSuffix: "万",
+        heroValue: income.num,
+        heroSuffix: income.suffix,
         heroLabel: "TOTAL INCOME",
         kpis: [
-          { label: "EXPENDITURE", value: Number(stats.totalExpenditure / 10000n), suffix: "万" },
+          { label: "EXPENDITURE", value: expenditure.num, suffix: expenditure.suffix },
           { label: "ORGANIZATIONS", value: stats.orgCount },
           { label: "REPORTS", value: stats.reportCount },
         ],
       };
+    }
     case "parliscope":
       return {
         heroValue: stats.billCount,
@@ -50,26 +71,30 @@ function buildCardData(serviceId: string, stats: PortalStats) {
           { label: "ELECTIONS", value: stats.electionCount },
         ],
       };
-    case "culturescope":
+    case "culturescope": {
+      const budget = formatYen(stats.culturalBudgetTotal);
       return {
-        heroValue: Number(stats.culturalBudgetTotal),
-        heroSuffix: "M",
+        heroValue: budget.num,
+        heroSuffix: budget.suffix,
         heroLabel: "CULTURAL BUDGET",
         kpis: [
           { label: "PROGRAMS", value: stats.programCount },
           { label: "STANCES", value: stats.culturalStanceCount },
         ],
       };
-    case "socialguard":
+    }
+    case "socialguard": {
+      const social = formatYen(stats.socialBudgetTotal);
       return {
-        heroValue: Number(stats.socialBudgetTotal),
-        heroSuffix: "億",
+        heroValue: social.num,
+        heroSuffix: social.suffix,
         heroLabel: "SOCIAL BUDGET",
         kpis: [
           { label: "PROGRAMS", value: stats.socialProgramCount },
           { label: "PREFECTURES", value: stats.welfarePrefectures },
         ],
       };
+    }
     default:
       return { heroValue: 0, heroLabel: "", kpis: [] };
   }
