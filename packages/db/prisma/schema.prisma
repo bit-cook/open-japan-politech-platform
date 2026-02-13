@@ -2,7 +2,8 @@
 // 全政党・全政治家の政治資金データを統一的に管理
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
