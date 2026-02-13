@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { motion } from "motion/react";
 
 interface GradientCardProps {
   children: ReactNode;
@@ -16,14 +19,21 @@ export function GradientCard({
   href,
 }: GradientCardProps) {
   const cardContent = (
-    <div
-      className={`group relative overflow-hidden rounded-xl bg-white shadow-card transition-all duration-300 hover:shadow-glow hover:scale-[1.02] ${className}`}
+    <motion.div
+      className={`group relative overflow-hidden rounded-xl bg-white shadow-card ${className}`}
+      whileHover={{
+        scale: 1.02,
+        boxShadow: "0 0 20px rgb(59 130 246 / 0.15)",
+        transition: { duration: 0.2 },
+      }}
     >
       <div
         className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${gradientFrom} ${gradientTo}`}
       />
+      {/* Shimmer overlay on hover */}
+      <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
       <div className="p-6">{children}</div>
-    </div>
+    </motion.div>
   );
 
   if (href) {

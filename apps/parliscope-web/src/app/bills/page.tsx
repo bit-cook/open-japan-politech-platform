@@ -1,5 +1,6 @@
 import { prisma } from "@ojpp/db";
 import { BillCard } from "@/components/bill-card";
+import { BillListAnimated } from "./bill-list-animated";
 
 export const dynamic = "force-dynamic";
 
@@ -101,7 +102,7 @@ export default async function BillsPage({ searchParams }: PageProps) {
 
       <p className="mb-4 text-sm text-gray-500">{total}件の法案</p>
 
-      <div className="space-y-3">
+      <BillListAnimated>
         {bills.map((bill) => (
           <BillCard
             key={bill.id}
@@ -115,7 +116,7 @@ export default async function BillsPage({ searchParams }: PageProps) {
             submittedAt={bill.submittedAt?.toISOString() ?? null}
           />
         ))}
-      </div>
+      </BillListAnimated>
 
       {totalPages > 1 && (
         <div className="mt-8 flex items-center justify-center gap-2">

@@ -1,4 +1,4 @@
-import { NavigationBar } from "@ojpp/ui";
+import { NavigationBar, SmoothScrollProvider, ScrollReveal } from "@ojpp/ui";
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
@@ -44,11 +44,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 text-center text-xs text-amber-800">
           v0.1 デモ版 — 選挙データは総務省公開資料に基づいています
         </div>
-        <main>{children}</main>
-        <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
-          <p>国会の勢力図を誰でも見える形に — AIエージェント時代の政治インフラ</p>
-          <p className="mt-1">Open Japan PoliTech Platform v0.1 | AGPL-3.0</p>
-        </footer>
+        <SmoothScrollProvider>
+          <main>{children}</main>
+        </SmoothScrollProvider>
+        <ScrollReveal>
+          <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
+            <p>国会の勢力図を誰でも見える形に — AIエージェント時代の政治インフラ</p>
+            <p className="mt-1">Open Japan PoliTech Platform v0.1 | AGPL-3.0</p>
+          </footer>
+        </ScrollReveal>
       </body>
     </html>
   );

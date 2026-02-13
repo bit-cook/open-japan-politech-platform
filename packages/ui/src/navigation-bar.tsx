@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 interface NavItem {
   href: string;
@@ -22,11 +24,24 @@ export function NavigationBar({
   accentColor = "text-blue-600",
 }: NavigationBarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const brandParts = brand.match(/^([A-Z][a-z]+)(.+)$/);
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? "bg-white/70 backdrop-blur-xl shadow-sm"
+          : "bg-white/80 backdrop-blur-md"
+      }`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href={brandHref} className="text-xl font-bold">
           {brandParts ? (
@@ -42,7 +57,11 @@ export function NavigationBar({
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 text-sm md:flex">
           {items.map((item) => (
-            <a key={item.href} href={item.href} className={`transition-colors ${accentColor}`}>
+            <a
+              key={item.href}
+              href={item.href}
+              className={`relative transition-colors ${accentColor} after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full`}
+            >
               {item.label}
             </a>
           ))}
@@ -75,21 +94,32 @@ export function NavigationBar({
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {isOpen && (
-        <nav className="md:hidden border-t bg-white px-6 py-4 animate-slide-up">
-          {items.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="block py-2 text-sm transition-colors hover:text-blue-600"
-              onClick={() => setIsOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      )}
+      {/* Mobile menu with AnimatePresence */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.nav
+            className="md:hidden border-t bg-white/95 backdrop-blur-lg px-6 py-4 overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            {items.map((item, i) => (
+              <motion.a
+                key={item.href}
+                href={item.href}
+                className="block py-2 text-sm transition-colors hover:text-blue-600"
+                onClick={() => setIsOpen(false)}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.05 }}
+              >
+                {item.label}
+              </motion.a>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

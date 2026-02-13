@@ -1,4 +1,4 @@
-import { NavigationBar } from "@ojpp/ui";
+import { NavigationBar, SmoothScrollProvider, ScrollReveal } from "@ojpp/ui";
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
@@ -48,12 +48,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           v0.1 デモ版 —
           政治資金データは疑似乱数で生成されたサンプルデータです。実際の収支報告書とは異なります。
         </div>
-        <main>{children}</main>
-        <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
-          <p>AIエージェント時代の政治資金監視 — 人間が見ていなくても、エージェントが見ている</p>
-          <p className="mt-1">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
-          <p className="mt-1">Open Japan PoliTech Platform v0.1 | AGPL-3.0</p>
-        </footer>
+        <SmoothScrollProvider>
+          <main>{children}</main>
+        </SmoothScrollProvider>
+        <ScrollReveal>
+          <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
+            <p>AIエージェント時代の政治資金監視 — 人間が見ていなくても、エージェントが見ている</p>
+            <p className="mt-1">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
+            <p className="mt-1">Open Japan PoliTech Platform v0.1 | AGPL-3.0</p>
+          </footer>
+        </ScrollReveal>
       </body>
     </html>
   );

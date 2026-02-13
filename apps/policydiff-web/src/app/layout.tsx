@@ -1,4 +1,4 @@
-import { NavigationBar } from "@ojpp/ui";
+import { NavigationBar, SmoothScrollProvider, ScrollReveal } from "@ojpp/ui";
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
@@ -49,12 +49,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           v0.1 デモ版 —
           政策データは各党の公式マニフェストを参考にしたデモ用データです。公式の政策文書ではありません。
         </div>
-        <main>{children}</main>
-        <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
-          <p>AIエージェント時代の政策比較 — あなたのエージェントが全政党の政策を常時分析する</p>
-          <p className="mt-1">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
-          <p className="mt-1">Open Japan PoliTech Platform v0.1 | AGPL-3.0</p>
-        </footer>
+        <SmoothScrollProvider>
+          <main>{children}</main>
+        </SmoothScrollProvider>
+        <ScrollReveal>
+          <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
+            <p>AIエージェント時代の政策比較 — あなたのエージェントが全政党の政策を常時分析する</p>
+            <p className="mt-1">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
+            <p className="mt-1">Open Japan PoliTech Platform v0.1 | AGPL-3.0</p>
+          </footer>
+        </ScrollReveal>
       </body>
     </html>
   );

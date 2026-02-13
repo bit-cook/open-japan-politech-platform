@@ -7,7 +7,7 @@ interface SkeletonProps {
 export function Skeleton({ className = "", width, height }: SkeletonProps) {
   return (
     <div
-      className={`animate-pulse rounded-md bg-gray-200 ${className}`}
+      className={`rounded-md bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:200%_100%] animate-[shimmer_1.5s_ease-in-out_infinite] ${className}`}
       style={{ width, height }}
     />
   );

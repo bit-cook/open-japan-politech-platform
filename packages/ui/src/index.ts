@@ -9,3 +9,7 @@ export { NavigationBar } from "./navigation-bar";
 export { Pagination } from "./pagination";
 export { Skeleton, SkeletonCard, SkeletonText } from "./skeleton";
 export { Stat } from "./stat";
+export { FadeIn, ScrollReveal, StaggerGrid, StaggerItem, PageTransition, AnimatedBar, AnimatePresence, motion } from "./motion-primitives";
+export { useInView, useScroll, useTransform } from "motion/react";
+export { SmoothScrollProvider } from "./smooth-scroll-provider";
+export { MotionCard } from "./motion-card";

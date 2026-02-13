@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@ojpp/ui";
+import { Card, StaggerGrid, StaggerItem } from "@ojpp/ui";
 import { useEffect, useState } from "react";
 
 interface Party {
@@ -137,9 +137,10 @@ export default function ComparePage() {
           <div className="text-gray-500">読み込み中...</div>
         </div>
       ) : policies.length > 0 ? (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <StaggerGrid className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {policies.map((policy) => (
-            <Card key={policy.id} padding="md" hover className="flex flex-col">
+            <StaggerItem key={policy.id}>
+            <Card padding="md" hover className="flex flex-col">
               <div className="mb-3 flex items-center gap-2">
                 {policy.party?.color && (
                   <span
@@ -174,8 +175,9 @@ export default function ComparePage() {
                 </a>
               </div>
             </Card>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGrid>
       ) : (
         <Card>
           <div className="text-center text-gray-500">

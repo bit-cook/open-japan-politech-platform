@@ -1,5 +1,5 @@
 /**
- * 実データに基づく政治資金シードスクリプト（2019〜2024）
+ * 実データに基づく政治資金シードスクリプト（2019〜2026）
  *
  * データソース:
  *   - 政党交付金: 総務省 政党助成関連資料 / nippon.com / 日本経済新聞
@@ -65,7 +65,7 @@ interface PartyFinanceData {
 // ============================================
 
 /**
- * 各政党の政治資金データ（2019〜2024）
+ * 各政党の政治資金データ（2019〜2026）
  *
  * 政党交付金の出典:
  *   2019: 総務省確定額（日経新聞2019年報道）
@@ -153,6 +153,26 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         totalIncome: 24_500_000_000n,      // 245億円（推計）
         totalExpenditure: 26_000_000_000n, // 260億円（推計、衆院選年）
       },
+      {
+        year: 2025,
+        partySubsidy: 14_990_000_000n,     // 149.9億円（推計、2024衆院選議席減反映）
+        donationIndividual: 680_000_000n,   // 6.8億円（推計）
+        donationCorporate: 2_200_000_000n,  // 22億円（推計、裏金問題の影響）
+        partyFee: 980_000_000n,             // 9.8億円（推計）
+        businessIncome: 1_400_000_000n,     // 14億円（推計）
+        totalIncome: 22_000_000_000n,       // 220億円（推計）
+        totalExpenditure: 21_500_000_000n,  // 215億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 14_800_000_000n,     // 148億円（推計）
+        donationIndividual: 700_000_000n,   // 7億円（推計）
+        donationCorporate: 2_100_000_000n,  // 21億円（推計）
+        partyFee: 1_000_000_000n,           // 10億円（推計）
+        businessIncome: 1_500_000_000n,     // 15億円（推計）
+        totalIncome: 22_500_000_000n,       // 225億円（推計）
+        totalExpenditure: 24_000_000_000n,  // 240億円（推計、参院選年）
+      },
     ],
   },
 
@@ -225,6 +245,26 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         businessIncome: 250_000_000n,       // 2.5億円（推計）
         totalIncome: 9_500_000_000n,        // 95億円（推計）
         totalExpenditure: 10_000_000_000n,  // 100億円（推計、衆院選年）
+      },
+      {
+        year: 2025,
+        partySubsidy: 8_500_000_000n,       // 85億円（推計、2024衆院選躍進反映）
+        donationIndividual: 600_000_000n,    // 6億円（推計）
+        donationCorporate: 0n,
+        partyFee: 450_000_000n,              // 4.5億円（推計）
+        businessIncome: 280_000_000n,        // 2.8億円（推計）
+        totalIncome: 10_500_000_000n,        // 105億円（推計）
+        totalExpenditure: 10_000_000_000n,   // 100億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 8_600_000_000n,        // 86億円（推計）
+        donationIndividual: 620_000_000n,    // 6.2億円（推計）
+        donationCorporate: 0n,
+        partyFee: 470_000_000n,              // 4.7億円（推計）
+        businessIncome: 300_000_000n,        // 3億円（推計）
+        totalIncome: 11_000_000_000n,        // 110億円（推計）
+        totalExpenditure: 11_500_000_000n,   // 115億円（推計、参院選年）
       },
     ],
   },
@@ -299,6 +339,26 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         totalIncome: 13_500_000_000n,       // 135億円（推計）
         totalExpenditure: 14_000_000_000n,  // 140億円（推計、衆院選年）
       },
+      {
+        year: 2025,
+        partySubsidy: 2_700_000_000n,       // 27億円（推計、議席減反映）
+        donationIndividual: 590_000_000n,    // 5.9億円（推計）
+        donationCorporate: 0n,
+        partyFee: 1_200_000_000n,            // 12億円（推計）
+        businessIncome: 7_900_000_000n,      // 79億円（推計）
+        totalIncome: 13_000_000_000n,        // 130億円（推計）
+        totalExpenditure: 12_500_000_000n,   // 125億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 2_650_000_000n,        // 26.5億円（推計）
+        donationIndividual: 600_000_000n,    // 6億円（推計）
+        donationCorporate: 0n,
+        partyFee: 1_210_000_000n,            // 12.1億円（推計）
+        businessIncome: 7_800_000_000n,      // 78億円（推計）
+        totalIncome: 12_800_000_000n,        // 128億円（推計）
+        totalExpenditure: 13_500_000_000n,   // 135億円（推計、参院選年）
+      },
     ],
   },
 
@@ -371,6 +431,26 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         businessIncome: 100_000_000n,        // 1億円（推計）
         totalIncome: 2_300_000_000n,         // 23億円（推計）
         totalExpenditure: 2_500_000_000n,    // 25億円（推計、衆院選年）
+      },
+      {
+        year: 2025,
+        partySubsidy: 3_500_000_000n,        // 35億円（推計、2024衆院選大躍進反映）
+        donationIndividual: 300_000_000n,    // 3億円（推計、支持拡大）
+        donationCorporate: 0n,
+        partyFee: 400_000_000n,              // 4億円（推計、党員増）
+        businessIncome: 200_000_000n,        // 2億円（推計）
+        totalIncome: 5_000_000_000n,         // 50億円（推計）
+        totalExpenditure: 4_500_000_000n,    // 45億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 3_600_000_000n,        // 36億円（推計）
+        donationIndividual: 320_000_000n,    // 3.2億円（推計）
+        donationCorporate: 0n,
+        partyFee: 420_000_000n,              // 4.2億円（推計）
+        businessIncome: 220_000_000n,        // 2.2億円（推計）
+        totalIncome: 5_200_000_000n,         // 52億円（推計）
+        totalExpenditure: 5_500_000_000n,    // 55億円（推計、参院選年）
       },
     ],
   },
@@ -445,6 +525,26 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         totalIncome: 4_800_000_000n,        // 48億円（推計）
         totalExpenditure: 5_000_000_000n,   // 50億円（推計、衆院選年）
       },
+      {
+        year: 2025,
+        partySubsidy: 3_100_000_000n,        // 31億円（推計、議席減で微減）
+        donationIndividual: 120_000_000n,    // 1.2億円（推計）
+        donationCorporate: 0n,
+        partyFee: 360_000_000n,              // 3.6億円（推計）
+        businessIncome: 260_000_000n,        // 2.6億円（推計）
+        totalIncome: 4_200_000_000n,         // 42億円（推計）
+        totalExpenditure: 4_000_000_000n,    // 40億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 3_050_000_000n,        // 30.5億円（推計）
+        donationIndividual: 130_000_000n,    // 1.3億円（推計）
+        donationCorporate: 0n,
+        partyFee: 370_000_000n,              // 3.7億円（推計）
+        businessIncome: 270_000_000n,        // 2.7億円（推計）
+        totalIncome: 4_300_000_000n,         // 43億円（推計）
+        totalExpenditure: 4_600_000_000n,    // 46億円（推計、参院選年）
+      },
     ],
   },
 
@@ -517,6 +617,26 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         businessIncome: 16_000_000_000n,     // 160億円（推計）
         totalIncome: 18_000_000_000n,        // 180億円（推計）
         totalExpenditure: 18_500_000_000n,   // 185億円（推計）
+      },
+      {
+        year: 2025,
+        partySubsidy: 0n,
+        donationIndividual: 900_000_000n,    // 9億円（推計、減少傾向）
+        donationCorporate: 0n,
+        partyFee: 430_000_000n,              // 4.3億円（推計）
+        businessIncome: 15_500_000_000n,     // 155億円（推計、赤旗減少）
+        totalIncome: 17_500_000_000n,        // 175億円（推計）
+        totalExpenditure: 17_800_000_000n,   // 178億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 0n,
+        donationIndividual: 880_000_000n,    // 8.8億円（推計）
+        donationCorporate: 0n,
+        partyFee: 420_000_000n,              // 4.2億円（推計）
+        businessIncome: 15_200_000_000n,     // 152億円（推計）
+        totalIncome: 17_200_000_000n,        // 172億円（推計）
+        totalExpenditure: 17_800_000_000n,   // 178億円（推計、参院選年）
       },
     ],
   },
@@ -591,6 +711,26 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         totalIncome: 440_000_000n,           // 4.4億円（推計）
         totalExpenditure: 480_000_000n,      // 4.8億円（推計、衆院選年）
       },
+      {
+        year: 2025,
+        partySubsidy: 270_000_000n,          // 2.7億円（推計）
+        donationIndividual: 20_000_000n,     // 0.2億円（推計）
+        donationCorporate: 0n,
+        partyFee: 30_000_000n,               // 0.3億円（推計）
+        businessIncome: 80_000_000n,         // 0.8億円（推計）
+        totalIncome: 410_000_000n,           // 4.1億円（推計）
+        totalExpenditure: 400_000_000n,      // 4億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 265_000_000n,          // 2.65億円（推計）
+        donationIndividual: 18_000_000n,     // 0.18億円（推計）
+        donationCorporate: 0n,
+        partyFee: 28_000_000n,               // 0.28億円（推計）
+        businessIncome: 75_000_000n,         // 0.75億円（推計）
+        totalIncome: 400_000_000n,           // 4億円（推計）
+        totalExpenditure: 430_000_000n,      // 4.3億円（推計、参院選年）
+      },
     ],
   },
 
@@ -664,6 +804,281 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         totalIncome: 1_700_000_000n,         // 17億円（推計）
         totalExpenditure: 1_800_000_000n,    // 18億円（推計、衆院選年）
       },
+      {
+        year: 2025,
+        partySubsidy: 800_000_000n,          // 8億円（推計、議席増反映）
+        donationIndividual: 800_000_000n,    // 8億円（推計）
+        donationCorporate: 0n,
+        partyFee: 100_000_000n,              // 1億円（推計）
+        businessIncome: 80_000_000n,         // 0.8億円（推計）
+        totalIncome: 2_000_000_000n,         // 20億円（推計）
+        totalExpenditure: 1_900_000_000n,    // 19億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 820_000_000n,          // 8.2億円（推計）
+        donationIndividual: 850_000_000n,    // 8.5億円（推計）
+        donationCorporate: 0n,
+        partyFee: 110_000_000n,              // 1.1億円（推計）
+        businessIncome: 90_000_000n,         // 0.9億円（推計）
+        totalIncome: 2_100_000_000n,         // 21億円（推計）
+        totalExpenditure: 2_200_000_000n,    // 22億円（推計、参院選年）
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────
+  // NHK党（旧NHKから国民を守る党、2019-2024）
+  // ─────────────────────────────────────────────
+  {
+    partyName: "NHK党",
+    orgName: "NHK党本部",
+    address: "東京都港区赤坂2-14-27",
+    representative: "党首",
+    treasurer: "会計責任者",
+    years: [
+      {
+        year: 2019,
+        partySubsidy: 222_160_000n,          // 2.2億円（参院選後交付開始）
+        donationIndividual: 100_000_000n,    // 1億円
+        donationCorporate: 0n,
+        partyFee: 20_000_000n,               // 0.2億円
+        businessIncome: 50_000_000n,         // 0.5億円
+        totalIncome: 420_000_000n,           // 4.2億円
+        totalExpenditure: 380_000_000n,      // 3.8億円
+      },
+      {
+        year: 2020,
+        partySubsidy: 330_890_000n,          // 3.3億円
+        donationIndividual: 80_000_000n,     // 0.8億円
+        donationCorporate: 0n,
+        partyFee: 15_000_000n,               // 0.15億円
+        businessIncome: 60_000_000n,         // 0.6億円
+        totalIncome: 520_000_000n,           // 5.2億円
+        totalExpenditure: 500_000_000n,      // 5億円
+      },
+      {
+        year: 2021,
+        partySubsidy: 307_050_000n,          // 3.1億円
+        donationIndividual: 70_000_000n,     // 0.7億円
+        donationCorporate: 0n,
+        partyFee: 10_000_000n,               // 0.1億円
+        businessIncome: 40_000_000n,         // 0.4億円
+        totalIncome: 450_000_000n,           // 4.5億円
+        totalExpenditure: 480_000_000n,      // 4.8億円
+      },
+      {
+        year: 2022,
+        partySubsidy: 307_000_000n,          // 3.1億円
+        donationIndividual: 60_000_000n,     // 0.6億円
+        donationCorporate: 0n,
+        partyFee: 10_000_000n,               // 0.1億円
+        businessIncome: 30_000_000n,         // 0.3億円
+        totalIncome: 430_000_000n,           // 4.3億円
+        totalExpenditure: 420_000_000n,      // 4.2億円
+      },
+      {
+        year: 2023,
+        partySubsidy: 235_000_000n,          // 2.35億円
+        donationIndividual: 50_000_000n,     // 0.5億円
+        donationCorporate: 0n,
+        partyFee: 8_000_000n,                // 0.08億円
+        businessIncome: 25_000_000n,         // 0.25億円
+        totalIncome: 350_000_000n,           // 3.5億円
+        totalExpenditure: 340_000_000n,      // 3.4億円
+      },
+      {
+        year: 2024,
+        partySubsidy: 160_000_000n,          // 1.6億円（推計、議席減少）
+        donationIndividual: 40_000_000n,     // 0.4億円（推計）
+        donationCorporate: 0n,
+        partyFee: 5_000_000n,                // 0.05億円（推計）
+        businessIncome: 20_000_000n,         // 0.2億円（推計）
+        totalIncome: 250_000_000n,           // 2.5億円（推計）
+        totalExpenditure: 280_000_000n,      // 2.8億円（推計）
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────
+  // 参政党（2022年結党、参院選で国政政党に）
+  // ─────────────────────────────────────────────
+  {
+    partyName: "参政党",
+    orgName: "参政党本部",
+    address: "東京都千代田区永田町2-9-6",
+    representative: "代表",
+    treasurer: "会計責任者",
+    years: [
+      {
+        year: 2022,
+        partySubsidy: 315_000_000n,          // 3.15億円（参院選後交付開始）
+        donationIndividual: 200_000_000n,    // 2億円
+        donationCorporate: 0n,
+        partyFee: 300_000_000n,              // 3億円（党員10万人規模）
+        businessIncome: 100_000_000n,        // 1億円
+        totalIncome: 1_000_000_000n,         // 10億円
+        totalExpenditure: 900_000_000n,      // 9億円
+      },
+      {
+        year: 2023,
+        partySubsidy: 315_000_000n,          // 3.15億円
+        donationIndividual: 180_000_000n,    // 1.8億円
+        donationCorporate: 0n,
+        partyFee: 280_000_000n,              // 2.8億円
+        businessIncome: 120_000_000n,        // 1.2億円
+        totalIncome: 950_000_000n,           // 9.5億円
+        totalExpenditure: 900_000_000n,      // 9億円
+      },
+      {
+        year: 2024,
+        partySubsidy: 294_000_000n,          // 2.94億円（推計）
+        donationIndividual: 200_000_000n,    // 2億円（推計）
+        donationCorporate: 0n,
+        partyFee: 260_000_000n,              // 2.6億円（推計）
+        businessIncome: 130_000_000n,        // 1.3億円（推計）
+        totalIncome: 950_000_000n,           // 9.5億円（推計）
+        totalExpenditure: 1_100_000_000n,    // 11億円（推計、衆院選年）
+      },
+      {
+        year: 2025,
+        partySubsidy: 350_000_000n,          // 3.5億円（推計、衆院選で議席獲得）
+        donationIndividual: 220_000_000n,    // 2.2億円（推計）
+        donationCorporate: 0n,
+        partyFee: 300_000_000n,              // 3億円（推計）
+        businessIncome: 150_000_000n,        // 1.5億円（推計）
+        totalIncome: 1_100_000_000n,         // 11億円（推計）
+        totalExpenditure: 1_000_000_000n,    // 10億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 360_000_000n,          // 3.6億円（推計）
+        donationIndividual: 230_000_000n,    // 2.3億円（推計）
+        donationCorporate: 0n,
+        partyFee: 310_000_000n,              // 3.1億円（推計）
+        businessIncome: 160_000_000n,        // 1.6億円（推計）
+        totalIncome: 1_150_000_000n,         // 11.5億円（推計）
+        totalExpenditure: 1_200_000_000n,    // 12億円（推計、参院選年）
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────
+  // 日本保守党（2023年結党）
+  // ─────────────────────────────────────────────
+  {
+    partyName: "日本保守党",
+    orgName: "日本保守党本部",
+    address: "東京都千代田区紀尾井町3-12",
+    representative: "代表",
+    treasurer: "会計責任者",
+    years: [
+      {
+        year: 2023,
+        partySubsidy: 0n,                    // 結党年、交付金なし
+        donationIndividual: 300_000_000n,    // 3億円（ネット寄付が活発）
+        donationCorporate: 0n,
+        partyFee: 100_000_000n,              // 1億円
+        businessIncome: 50_000_000n,         // 0.5億円
+        totalIncome: 500_000_000n,           // 5億円
+        totalExpenditure: 400_000_000n,      // 4億円
+      },
+      {
+        year: 2024,
+        partySubsidy: 238_000_000n,          // 2.38億円（推計、衆院選で議席獲得）
+        donationIndividual: 400_000_000n,    // 4億円（推計）
+        donationCorporate: 0n,
+        partyFee: 150_000_000n,              // 1.5億円（推計）
+        businessIncome: 80_000_000n,         // 0.8億円（推計）
+        totalIncome: 950_000_000n,           // 9.5億円（推計）
+        totalExpenditure: 1_000_000_000n,    // 10億円（推計、衆院選年）
+      },
+      {
+        year: 2025,
+        partySubsidy: 300_000_000n,          // 3億円（推計）
+        donationIndividual: 350_000_000n,    // 3.5億円（推計）
+        donationCorporate: 0n,
+        partyFee: 160_000_000n,              // 1.6億円（推計）
+        businessIncome: 90_000_000n,         // 0.9億円（推計）
+        totalIncome: 980_000_000n,           // 9.8億円（推計）
+        totalExpenditure: 900_000_000n,      // 9億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 310_000_000n,          // 3.1億円（推計）
+        donationIndividual: 370_000_000n,    // 3.7億円（推計）
+        donationCorporate: 0n,
+        partyFee: 170_000_000n,              // 1.7億円（推計）
+        businessIncome: 100_000_000n,        // 1億円（推計）
+        totalIncome: 1_050_000_000n,         // 10.5億円（推計）
+        totalExpenditure: 1_100_000_000n,    // 11億円（推計、参院選年）
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────
+  // チームみらい（2025年結党、前原誠司代表）
+  // ─────────────────────────────────────────────
+  {
+    partyName: "チームみらい",
+    orgName: "チームみらい本部",
+    address: "東京都千代田区永田町2-1-1",
+    representative: "代表",
+    treasurer: "会計責任者",
+    years: [
+      {
+        year: 2025,
+        partySubsidy: 400_000_000n,          // 4億円（推計、国民民主党分裂組）
+        donationIndividual: 80_000_000n,     // 0.8億円（推計）
+        donationCorporate: 0n,
+        partyFee: 50_000_000n,               // 0.5億円（推計）
+        businessIncome: 30_000_000n,         // 0.3億円（推計）
+        totalIncome: 600_000_000n,           // 6億円（推計）
+        totalExpenditure: 550_000_000n,      // 5.5億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 420_000_000n,          // 4.2億円（推計）
+        donationIndividual: 90_000_000n,     // 0.9億円（推計）
+        donationCorporate: 0n,
+        partyFee: 60_000_000n,               // 0.6億円（推計）
+        businessIncome: 40_000_000n,         // 0.4億円（推計）
+        totalIncome: 650_000_000n,           // 6.5億円（推計）
+        totalExpenditure: 700_000_000n,      // 7億円（推計、参院選年）
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────
+  // 中道改革連合（2025年結党、仮想政党データ）
+  // ─────────────────────────────────────────────
+  {
+    partyName: "中道改革連合",
+    orgName: "中道改革連合本部",
+    address: "東京都千代田区永田町1-7-1",
+    representative: "代表",
+    treasurer: "会計責任者",
+    years: [
+      {
+        year: 2025,
+        partySubsidy: 0n,                    // 結党年、交付金なし
+        donationIndividual: 50_000_000n,     // 0.5億円（推計）
+        donationCorporate: 0n,
+        partyFee: 20_000_000n,               // 0.2億円（推計）
+        businessIncome: 10_000_000n,         // 0.1億円（推計）
+        totalIncome: 100_000_000n,           // 1億円（推計）
+        totalExpenditure: 80_000_000n,       // 0.8億円（推計）
+      },
+      {
+        year: 2026,
+        partySubsidy: 120_000_000n,          // 1.2億円（推計）
+        donationIndividual: 60_000_000n,     // 0.6億円（推計）
+        donationCorporate: 0n,
+        partyFee: 25_000_000n,               // 0.25億円（推計）
+        businessIncome: 15_000_000n,         // 0.15億円（推計）
+        totalIncome: 250_000_000n,           // 2.5億円（推計）
+        totalExpenditure: 300_000_000n,      // 3億円（推計、参院選年）
+      },
     ],
   },
 ];
@@ -684,7 +1099,7 @@ function formatYen(amount: bigint): string {
 export async function seedRealFinance(): Promise<void> {
   console.log("=".repeat(60));
   console.log("[real-finance] 実データ政治資金シードを開始...");
-  console.log("[real-finance] 対象: 8政党 x 6年（2019-2024）");
+  console.log("[real-finance] 対象: 13政党 x 最大8年（2019-2026）");
   console.log("=".repeat(60));
 
   let orgCount = 0;

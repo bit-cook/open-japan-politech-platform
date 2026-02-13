@@ -1,4 +1,7 @@
+"use client";
+
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { motion } from "motion/react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline" | "ghost";
@@ -32,10 +35,13 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button
+    <motion.button
       className={`inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ${variants[variant]} ${sizes[size]} ${className}`}
       disabled={disabled || loading}
-      {...props}
+      whileTap={{ scale: 0.97 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      {...(props as Record<string, unknown>)}
     >
       {loading ? (
         <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
@@ -57,6 +63,6 @@ export function Button({
         <span className="shrink-0">{icon}</span>
       ) : null}
       {children}
-    </button>
+    </motion.button>
   );
 }

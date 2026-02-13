@@ -1,6 +1,8 @@
 "use client";
+
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { motion, useInView } from "motion/react";
 
 interface Column<T> {
   key: string;
@@ -25,6 +27,8 @@ export function DataTable<T extends Record<string, unknown>>({
 }: DataTableProps<T>) {
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const tableRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(tableRef, { once: true, margin: "-40px" });
 
   const handleSort = (key: string) => {
     if (sortKey === key) {
@@ -50,7 +54,7 @@ export function DataTable<T extends Record<string, unknown>>({
     align === "right" ? "text-right" : align === "center" ? "text-center" : "text-left";
 
   return (
-    <div className={`overflow-x-auto rounded-xl border bg-white shadow-card ${className}`}>
+    <div ref={tableRef} className={`overflow-x-auto rounded-xl border bg-white shadow-card ${className}`}>
       <table className="w-full text-left text-sm">
         <thead className="border-b bg-gray-50/80">
           <tr>
@@ -72,17 +76,20 @@ export function DataTable<T extends Record<string, unknown>>({
         </thead>
         <tbody>
           {sortedData.map((item, i) => (
-            <tr
+            <motion.tr
               key={i}
               className={`border-b last:border-0 transition-colors hover:bg-blue-50/50 ${onRowClick ? "cursor-pointer" : ""}`}
               onClick={onRowClick ? () => onRowClick(item) : undefined}
+              initial={{ opacity: 0, x: -10 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.3, delay: Math.min(i * 0.03, 0.5) }}
             >
               {columns.map((col) => (
                 <td key={col.key} className={`px-4 py-3 ${alignClass(col.align)}`}>
                   {col.render ? col.render(item) : String(item[col.key] ?? "")}
                 </td>
               ))}
-            </tr>
+            </motion.tr>
           ))}
         </tbody>
       </table>
