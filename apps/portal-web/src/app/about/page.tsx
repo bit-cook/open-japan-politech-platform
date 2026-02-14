@@ -10,6 +10,12 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <FadeIn>
+        <a
+          href="/"
+          className="mono mb-6 inline-flex items-center gap-1.5 text-[0.7rem] tracking-[1.5px] text-[var(--text-dim)] transition-colors hover:text-[var(--accent)]"
+        >
+          {"← BACK TO PORTAL"}
+        </a>
         <p className="label-upper mb-3 tracking-[4px]">{"// ABOUT"}</p>
         <h1 className="text-3xl font-extrabold tracking-tight text-[var(--text)]">
           {PLATFORM_META.name}
@@ -96,6 +102,16 @@ export default function AboutPage() {
           </a>
           <p className="mt-4 kpi-value text-[0.55rem] text-[var(--text-ghost)]">
             {PLATFORM_META.license}
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <section className="mt-10 border border-[var(--border)] bg-[var(--bg-card)] p-5 text-xs leading-relaxed text-[var(--text-ghost)]">
+          <p className="label-upper mb-2 tracking-[3px] text-[var(--text-dim)]">NOTE</p>
+          <p>
+            ポータルおよび各サービスに表示されているデータは v{PLATFORM_META.version} 時点の仮データです。
+            正式なデータソースとの連携は今後のアップデートで順次対応予定です。
           </p>
         </section>
       </ScrollReveal>
