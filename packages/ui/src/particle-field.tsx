@@ -154,7 +154,6 @@ export function ParticleField({
       ref={canvasRef}
       className={`absolute inset-0 h-full w-full ${className}`}
       style={{ pointerEvents: "auto" }}
-      aria-hidden="true"
     />
   );
 }

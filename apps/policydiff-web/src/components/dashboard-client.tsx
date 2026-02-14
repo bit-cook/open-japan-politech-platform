@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "@ojpp/ui";
+import { AnimatePresence, motion, useInView } from "@ojpp/ui";
+import { useRef, useState } from "react";
 
 interface DashboardProps {
   stats: {
@@ -30,15 +30,7 @@ interface DashboardProps {
 }
 
 /* ── Animated Stat Card ── */
-function StatCard({
-  label,
-  value,
-  delay,
-}: {
-  label: string;
-  value: number;
-  delay: number;
-}) {
+function StatCard({ label, value, delay }: { label: string; value: number; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
 
@@ -71,8 +63,8 @@ function PolicyCard({
   policy: DashboardProps["policies"][number];
   index: number;
 }) {
-  const maxContent = 200;
-  const totalPolicies = 12;
+  const _maxContent = 200;
+  const _totalPolicies = 12;
   const progressPercent = Math.max(30, Math.min(90, 80 - index * 5));
 
   return (
@@ -99,16 +91,12 @@ function PolicyCard({
             style={{ backgroundColor: policy.partyColor }}
           />
         )}
-        <span className="text-sm font-semibold text-white">
-          {policy.partyName ?? "不明"}
-        </span>
+        <span className="text-sm font-semibold text-white">{policy.partyName ?? "不明"}</span>
       </div>
 
       {/* Content preview */}
       <p className="mb-4 text-sm leading-relaxed text-slate-400">
-        {policy.content.length > 80
-          ? `${policy.content.slice(0, 80)}...`
-          : policy.content}
+        {policy.content.length > 80 ? `${policy.content.slice(0, 80)}...` : policy.content}
       </p>
 
       {/* Tags */}
@@ -148,7 +136,7 @@ export function DashboardClient({
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-  const isCardsInView = useInView(cardsRef, { once: true, margin: "-40px" });
+  const _isCardsInView = useInView(cardsRef, { once: true, margin: "-40px" });
 
   const filteredPolicies = selectedCategory
     ? policies.filter((p) => p.category === selectedCategory)
@@ -224,9 +212,7 @@ export function DashboardClient({
               <button
                 key={cat}
                 type="button"
-                onClick={() =>
-                  setSelectedCategory((prev) => (prev === cat ? null : cat))
-                }
+                onClick={() => setSelectedCategory((prev) => (prev === cat ? null : cat))}
                 className={`filter-chip ${selectedCategory === cat ? "filter-chip--active" : ""}`}
               >
                 {cat}
@@ -252,9 +238,7 @@ export function DashboardClient({
                 ))
               ) : (
                 <div className="col-span-full py-16 text-center">
-                  <p className="text-slate-500">
-                    該当する政策がありません。
-                  </p>
+                  <p className="text-slate-500">該当する政策がありません。</p>
                 </div>
               )}
             </motion.div>

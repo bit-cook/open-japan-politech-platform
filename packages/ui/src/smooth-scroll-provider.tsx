@@ -22,7 +22,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
       function raf(time: number) {
         if (destroyed) return;
-        lenis!.raf(time);
+        lenis?.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);

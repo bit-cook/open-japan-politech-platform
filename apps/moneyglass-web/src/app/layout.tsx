@@ -52,7 +52,10 @@ const NAV_ITEMS = [
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ja" className={`${inter.variable} ${notoSansJPSubset.variable} ${notoSansJPFull.variable}`}>
+    <html
+      lang="ja"
+      className={`${inter.variable} ${notoSansJPSubset.variable} ${notoSansJPFull.variable}`}
+    >
       <body className="animated-gradient-bg min-h-screen font-sans text-[#f0f0f0] antialiased">
         <NavigationBar
           brand="MoneyGlass"
@@ -69,9 +72,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </SmoothScrollProvider>
         <footer className="border-t border-[rgba(255,255,255,0.06)] bg-[#0d1117] px-6 py-12 text-center text-sm text-[#8b949e]">
           <div className="mx-auto max-w-7xl">
-            <p className="font-medium text-[#FFAD80]">AIエージェント時代の政治資金監視 — 人間が見ていなくても、エージェントが見ている</p>
+            <p className="font-medium text-[#FFAD80]">
+              AIエージェント時代の政治資金監視 — 人間が見ていなくても、エージェントが見ている
+            </p>
             <p className="mt-2">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
-            <p className="mt-1 text-[#6e7681]">Open Japan PoliTech Platform v0.1 | AGPL-3.0-or-later</p>
+            <p className="mt-1 text-[#6e7681]">
+              Open Japan PoliTech Platform v0.1 | AGPL-3.0-or-later
+            </p>
           </div>
         </footer>
       </body>

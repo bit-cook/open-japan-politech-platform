@@ -1,7 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { motion } from "motion/react";
+import type { ReactNode } from "react";
 
 interface GradientCardProps {
   children: ReactNode;
@@ -36,7 +36,7 @@ export function GradientCard({
         scale: 1.02,
         boxShadow:
           variant === "dark"
-            ? `0 0 24px ${accentColor ? accentColor + "33" : "rgba(255,107,53,0.15)"}`
+            ? `0 0 24px ${accentColor ? `${accentColor}33` : "rgba(255,107,53,0.15)"}`
             : "0 0 20px rgb(59 130 246 / 0.15)",
         transition: { duration: 0.2 },
       }}

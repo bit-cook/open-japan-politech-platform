@@ -7,8 +7,8 @@
  * Usage: npx tsx scripts/generate-font-subset.ts
  */
 
-import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
-import { join, dirname, extname } from "node:path";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { dirname, extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = import.meta.dirname ?? dirname(fileURLToPath(import.meta.url));

@@ -3,7 +3,9 @@
 
 /* サブセット(preload)→フルセット(on-demand)→Inter の順でフォールバック */
 @theme {
-  --font-sans: var(--font-noto-sans-jp), var(--font-noto-sans-jp-full), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    var(--font-noto-sans-jp), var(--font-noto-sans-jp-full), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
 }
 
 /* MoneyGlass Dark Theme Custom Properties */
@@ -11,10 +13,10 @@
   --mg-bg-primary: #0f1119;
   --mg-bg-secondary: #1a1a2e;
   --mg-bg-tertiary: #16213e;
-  --mg-accent: #FF6B35;
-  --mg-accent-light: #FF8C5A;
-  --mg-accent-muted: #FFAD80;
-  --mg-accent-pale: #FFD4B8;
+  --mg-accent: #ff6b35;
+  --mg-accent-light: #ff8c5a;
+  --mg-accent-muted: #ffad80;
+  --mg-accent-pale: #ffd4b8;
   --mg-accent-glow: rgba(255, 107, 53, 0.15);
   --mg-border: rgba(255, 255, 255, 0.06);
   --mg-border-accent: rgba(255, 107, 53, 0.3);
@@ -42,18 +44,28 @@
 
 /* Glow effects */
 .glow-orange {
-  box-shadow: 0 0 20px rgba(255, 107, 53, 0.1), 0 0 60px rgba(255, 107, 53, 0.05);
+  box-shadow:
+    0 0 20px rgba(255, 107, 53, 0.1),
+    0 0 60px rgba(255, 107, 53, 0.05);
 }
 
 .glow-orange-hover:hover {
-  box-shadow: 0 0 30px rgba(255, 107, 53, 0.2), 0 0 80px rgba(255, 107, 53, 0.1);
+  box-shadow:
+    0 0 30px rgba(255, 107, 53, 0.2),
+    0 0 80px rgba(255, 107, 53, 0.1);
 }
 
 /* Animated gradient background */
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animated-gradient-bg {
@@ -83,19 +95,19 @@
 /* Recharts dark theme overrides */
 .recharts-cartesian-grid-horizontal line,
 .recharts-cartesian-grid-vertical line {
-  stroke: rgba(255, 255, 255, 0.06) !important;
+  stroke: rgba(255, 255, 255, 0.06);
 }
 
 .recharts-text {
-  fill: #8b949e !important;
+  fill: #8b949e;
 }
 
 .recharts-tooltip-wrapper .recharts-default-tooltip {
-  background: #1a1a2e !important;
-  border: 1px solid rgba(255, 107, 53, 0.2) !important;
-  border-radius: 12px !important;
+  background: #1a1a2e;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  border-radius: 12px;
 }
 
 .recharts-legend-item-text {
-  color: #8b949e !important;
+  color: #8b949e;
 }

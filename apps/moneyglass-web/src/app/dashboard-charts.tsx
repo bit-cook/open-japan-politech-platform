@@ -1,7 +1,7 @@
 "use client";
 
-import { type ComponentType, useEffect, useRef, useState } from "react";
 import { useInView } from "@ojpp/ui";
+import { type ComponentType, useEffect, useRef, useState } from "react";
 
 interface YearlyData {
   year: number;

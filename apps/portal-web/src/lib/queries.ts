@@ -167,7 +167,7 @@ export async function getPortalStats(): Promise<PortalStats> {
       socialProgramCount,
       welfarePrefectures,
     };
-  } catch (e) {
+  } catch (_e) {
     console.warn("[portal] DB unreachable, using fallback stats");
     return FALLBACK_STATS;
   }
