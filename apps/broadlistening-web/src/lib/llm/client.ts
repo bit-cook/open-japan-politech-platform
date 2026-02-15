@@ -3,13 +3,11 @@ import Anthropic from "@anthropic-ai/sdk";
 let defaultClient: Anthropic | null = null;
 
 export function getClient(apiKey?: string): Anthropic {
-  if (apiKey) {
-    return new Anthropic({ apiKey });
+  const key = apiKey || process.env.ANTHROPIC_API_KEY;
+  if (!key) {
+    throw new Error("APIキーが設定されていません。右上の「Set API Key」からAnthropicのAPIキーを入力してください。");
   }
-  if (!defaultClient) {
-    defaultClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  }
-  return defaultClient;
+  return new Anthropic({ apiKey: key });
 }
 
 export async function complete(
