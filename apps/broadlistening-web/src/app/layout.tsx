@@ -28,6 +28,12 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "BroadListening β — 意見生態系プラットフォーム",
+    description:
+      "意見を計算機自然の生態系として可視化。デジタルフェロモンとArgument Miningが自己組織化的に合意を形成する。",
+  },
 };
 
 const NAV_ITEMS = [

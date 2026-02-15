@@ -120,7 +120,7 @@ export const PLATFORM_META = {
   shortName: "OJPP",
   version: "0.1.2",
   tagline: "AIエージェント時代の政治インフラ",
-  subtitle: "8 Apps \u00d7 29 Models \u00d7 50+ API Endpoints",
+  subtitle: "9 Apps \u00d7 29 Models \u00d7 50+ API Endpoints",
   license: "AGPL-3.0-or-later",
   github: "https://github.com/ochyai/open-japan-politech-platform",
 };

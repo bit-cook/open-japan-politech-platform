@@ -29,6 +29,49 @@ interface StreamOpinion {
   fitness: number;
 }
 
+/** ヒーローセクション用ハードコード意見 — API待ちなしで即表示 */
+const HERO_OPINIONS: StreamOpinion[] = [
+  { content: "児童手当を月5万円に引き上げるべき。フランスの家族手当モデルが参考になる。", stance: "FOR", fitness: 0.88 },
+  { content: "現金給付だけでは効果が薄い。保育所の待機児童ゼロが先決。", stance: "AGAINST", fitness: 0.72 },
+  { content: "大学教育費の完全無償化が最も効果的。教育費への不安が最大の理由。", stance: "FOR", fitness: 0.81 },
+  { content: "少子化は個人の選択の結果であり、政府が介入すべきではない。", stance: "AGAINST", fitness: 0.65 },
+  { content: "企業の働き方改革こそ本丸。テレワーク・フレックスの義務化を。", stance: "NEUTRAL", fitness: 0.77 },
+  { content: "EU型の包括的なリスクベース規制を早期に導入すべき。", stance: "FOR", fitness: 0.85 },
+  { content: "過度な規制はイノベーションを阻害する。ソフトローで柔軟に対応すべき。", stance: "AGAINST", fitness: 0.70 },
+  { content: "AIが生成したコンテンツには透かしを義務化すべき。", stance: "FOR", fitness: 0.82 },
+  { content: "AIリテラシー教育を義務教育に組み込むべき。", stance: "NEUTRAL", fitness: 0.79 },
+  { content: "再生可能エネルギー100%を2035年までに達成すべき。", stance: "FOR", fitness: 0.83 },
+  { content: "原発再稼働は現実的に必要。ベースロード電源として不可欠。", stance: "AGAINST", fitness: 0.68 },
+  { content: "カーボンプライシングの早期導入で市場メカニズムを活用すべき。", stance: "FOR", fitness: 0.76 },
+  { content: "地方分権の強化を求む。都市部と地方で必要な施策は大きく異なる。", stance: "FOR", fitness: 0.74 },
+  { content: "デジタル民主主義の推進。市民参加型の政策立案を。", stance: "FOR", fitness: 0.86 },
+  { content: "社会保障制度の持続可能性を根本から再設計すべき。", stance: "NEUTRAL", fitness: 0.71 },
+  { content: "オープンデータの活用推進。透明性のある政治資金を。", stance: "FOR", fitness: 0.80 },
+  { content: "多様性を尊重する社会制度の構築が急務。", stance: "NEUTRAL", fitness: 0.73 },
+  { content: "次世代への投資拡大。科学技術政策の充実を。", stance: "FOR", fitness: 0.78 },
+  { content: "男女の賃金格差の解消が最優先。経済的自立なしに安心して産めない。", stance: "FOR", fitness: 0.84 },
+  { content: "保育士の給与を一般企業並みに引き上げるべき。", stance: "FOR", fitness: 0.75 },
+  { content: "マイナンバー制度の利便性向上と、プライバシー保護の両立を。", stance: "NEUTRAL", fitness: 0.69 },
+  { content: "防衛費増額より教育・研究開発投資を優先すべき。", stance: "AGAINST", fitness: 0.67 },
+  { content: "選挙制度改革。若者の投票率を上げるオンライン投票を。", stance: "FOR", fitness: 0.87 },
+  { content: "気候変動への具体的行動計画。2030年目標の引き上げを。", stance: "FOR", fitness: 0.82 },
+  { content: "フリーランス・ギグワーカーの社会保障を整備すべき。", stance: "FOR", fitness: 0.76 },
+  { content: "公共交通のバリアフリー化を加速すべき。高齢社会のインフラ整備。", stance: "FOR", fitness: 0.72 },
+  { content: "食料自給率の向上は国家安全保障の問題。農業政策の抜本改革を。", stance: "FOR", fitness: 0.74 },
+  { content: "空き家問題と住宅政策。若者に手の届く住宅供給を。", stance: "NEUTRAL", fitness: 0.70 },
+  { content: "メンタルヘルスケアの公的支援を拡充すべき。社会的コストは計り知れない。", stance: "FOR", fitness: 0.79 },
+  { content: "地域包括ケアシステムの全国展開を急ぐべき。", stance: "FOR", fitness: 0.71 },
+  { content: "顔認識AIの公共空間での使用を厳しく制限すべき。", stance: "FOR", fitness: 0.80 },
+  { content: "介護離職ゼロの実現。介護と仕事の両立支援を制度化すべき。", stance: "FOR", fitness: 0.77 },
+  { content: "子どもの貧困対策。教育格差を生まない社会の仕組みづくり。", stance: "FOR", fitness: 0.85 },
+  { content: "災害対策のDX。AI・ドローンを活用した防災システムの構築を。", stance: "FOR", fitness: 0.78 },
+  { content: "文化芸術への公的投資を倍増すべき。GDP比0.1%は先進国最低水準。", stance: "FOR", fitness: 0.73 },
+  { content: "デジタル庁の権限を強化し、行政のDXを加速すべき。", stance: "FOR", fitness: 0.76 },
+];
+
+/** ヒーローセクション用ハードコード統計値 */
+const HERO_STATS = { topicCount: 5, totalOpinions: 200 };
+
 const PHASE_MAP: Record<string, { label: string; badge: string; dot: string }> = {
   OPEN: { label: "Collecting", badge: "badge-lumi badge-lumi--emerald", dot: "bg-emerald-400" },
   DELIBERATION: { label: "Deliberating", badge: "badge-lumi badge-lumi--amber", dot: "bg-amber-400" },
@@ -68,7 +111,6 @@ const STEPS = [
 
 export default function HomePage() {
   const [topics, setTopics] = useState<TopicSummary[]>([]);
-  const [opinions, setOpinions] = useState<StreamOpinion[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -78,28 +120,7 @@ export default function HomePage() {
       try {
         const topicsRes = await fetch("/api/topics?limit=20");
         const topicsData = topicsRes.ok ? await topicsRes.json() : { data: [] };
-        const topicList: TopicSummary[] = topicsData.data ?? [];
-        setTopics(topicList);
-
-        if (topicList.length > 0) {
-          const ecoResults = await Promise.all(
-            topicList.slice(0, 10).map(async (t) => {
-              try {
-                const res = await fetch(`/api/topics/${t.id}/ecosystem`);
-                if (res.ok) {
-                  const data = await res.json();
-                  return (data.ecosystem?.opinions ?? []).map((o: Record<string, unknown>) => ({
-                    content: o.content as string,
-                    stance: (o.stance as string) ?? "NEUTRAL",
-                    fitness: (o.fitness as number) ?? 0.5,
-                  }));
-                }
-              } catch { /* ignore */ }
-              return [];
-            })
-          );
-          setOpinions(ecoResults.flat());
-        }
+        setTopics(topicsData.data ?? []);
       } catch { /* ignore */ }
       finally { setLoaded(true); }
     }
@@ -113,8 +134,6 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const totalOpinions = topics.reduce((s, t) => s + t._count.opinions, 0);
-
   return (
     <div className="relative">
       {/* ═══════════════════════════════════════════
@@ -124,12 +143,10 @@ export default function HomePage() {
         {/* Layer 0: Flow field particles */}
         <LivingCanvas particleCount={600} palette="cyan" interactive />
 
-        {/* Layer 1: Opinion stream — flowing kinetic typography + liquid lens + noise */}
-        {opinions.length > 0 && (
-          <div className="absolute inset-0 z-[1] liquid-lens-container noise-flicker">
-            <OpinionStream opinions={opinions} lanes={18} className="h-full" density="dense" />
-          </div>
-        )}
+        {/* Layer 1: Opinion stream — ハードコード意見で即表示 */}
+        <div className="absolute inset-0 z-[1] liquid-lens-container noise-flicker">
+          <OpinionStream opinions={HERO_OPINIONS} lanes={18} className="h-full" density="dense" />
+        </div>
 
         {/* Layer 2: Directional vignette */}
         <div
@@ -184,11 +201,10 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {loaded && topics.length > 0 && (
-              <div className="mt-16 flex gap-12 animate-in animate-in-delay-4">
+            <div className="mt-16 flex gap-12 animate-in animate-in-delay-4">
                 {[
-                  { value: topics.length, label: "Active Topics" },
-                  { value: totalOpinions, label: "Opinions Flowing" },
+                  { value: HERO_STATS.topicCount, label: "Active Topics" },
+                  { value: HERO_STATS.totalOpinions, label: "Opinions Flowing" },
                 ].map((s) => (
                   <div key={s.label}>
                     <div className="text-4xl font-black text-white" style={{ fontFamily: "var(--font-outfit)" }}>
@@ -200,7 +216,6 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-            )}
           </div>
         </div>
 
