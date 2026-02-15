@@ -22,9 +22,7 @@ export default function Image() {
       <div style={{ fontSize: 80, fontWeight: "bold", marginBottom: 16, display: "flex" }}>
         BroadListening β
       </div>
-      <div style={{ fontSize: 36, opacity: 0.9, display: "flex" }}>
-        意見生態系プラットフォーム
-      </div>
+      <div style={{ fontSize: 36, opacity: 0.9, display: "flex" }}>意見生態系プラットフォーム</div>
       <div style={{ fontSize: 22, opacity: 0.6, marginTop: 48, display: "flex" }}>
         Open Japan PoliTech Platform
       </div>
