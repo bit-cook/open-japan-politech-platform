@@ -118,7 +118,7 @@ export const SERVICES: ServiceDefinition[] = [
 export const PLATFORM_META = {
   name: "Open Japan PoliTech Platform",
   shortName: "OJPP",
-  version: "0.1.2",
+  version: "0.1.5",
   tagline: "AIエージェント時代の政治インフラ",
   subtitle: "9 Apps \u00d7 29 Models \u00d7 50+ API Endpoints",
   license: "AGPL-3.0-or-later",
