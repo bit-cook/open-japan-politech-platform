@@ -167,8 +167,8 @@ export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
           -MAX_DRAG_DELTA,
           Math.min(MAX_DRAG_DELTA, e.clientY - dragRef.current.lastY),
         );
-        dragRef.current.rotY += dx * DRAG_ROTATE_SENSITIVITY;
-        dragRef.current.rotX += dy * DRAG_ROTATE_SENSITIVITY;
+        dragRef.current.rotY -= dx * DRAG_ROTATE_SENSITIVITY;
+        dragRef.current.rotX -= dy * DRAG_ROTATE_SENSITIVITY;
         dragRef.current.lastX = e.clientX;
         dragRef.current.lastY = e.clientY;
       }
