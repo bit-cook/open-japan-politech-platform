@@ -3,7 +3,7 @@
 import { AnimatedCounter, FadeIn } from "@ojpp/ui";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ApiKeySettings, apiHeaders, useApiKey } from "@/components/api-key-settings";
 import { ArgumentGraphView } from "@/components/argument-graph/argument-graph-view";
 import { Cluster3DView } from "@/components/cluster-3d-view";
@@ -280,6 +280,26 @@ export default function TopicDetailPage() {
     }
   }
 
+  const opinions = eco?.ecosystem.opinions ?? [];
+  const clusters = eco?.ecosystem.clusters ?? [];
+  const nodes = eco?.argumentGraph.nodes ?? [];
+  const edges = eco?.argumentGraph.edges ?? [];
+  const pSources = eco?.pheromone.sources ?? [];
+  const clusterOpinions = useMemo(
+    () =>
+      opinions.map((o) => ({
+        id: o.id,
+        content: o.content,
+        stance: o.stance,
+        clusterId: o.clusterId,
+        clusterLabel: o.clusterLabel,
+        clusterColor: o.clusterColor,
+        fitness: o.fitness,
+        embedding: o.embedding,
+      })),
+    [opinions],
+  );
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -315,11 +335,6 @@ export default function TopicDetailPage() {
 
   const phase = PHASE_MAP[topic.phase] ?? PHASE_MAP.OPEN;
   const isOpen = topic.phase !== "CLOSED";
-  const opinions = eco?.ecosystem.opinions ?? [];
-  const clusters = eco?.ecosystem.clusters ?? [];
-  const nodes = eco?.argumentGraph.nodes ?? [];
-  const edges = eco?.argumentGraph.edges ?? [];
-  const pSources = eco?.pheromone.sources ?? [];
 
   const forOps = opinions.filter((o) => o.stance === "FOR");
   const againstOps = opinions.filter((o) => o.stance === "AGAINST");
@@ -848,19 +863,7 @@ export default function TopicDetailPage() {
           <FadeIn>
             <div className="glass-card overflow-hidden" style={{ minHeight: 500 }}>
               {opinions.length > 0 ? (
-                <Cluster3DView
-                  opinions={opinions.map((o) => ({
-                    id: o.id,
-                    content: o.content,
-                    stance: o.stance,
-                    clusterId: o.clusterId,
-                    clusterLabel: o.clusterLabel,
-                    clusterColor: o.clusterColor,
-                    fitness: o.fitness,
-                    embedding: o.embedding,
-                  }))}
-                  className="h-[560px] w-full"
-                />
+                <Cluster3DView opinions={clusterOpinions} className="h-[560px] w-full" />
               ) : (
                 <EmptyState onAi={handleAi} aiRunning={aiRunning} />
               )}
