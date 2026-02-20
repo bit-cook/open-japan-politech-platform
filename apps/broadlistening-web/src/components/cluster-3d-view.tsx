@@ -84,6 +84,10 @@ const STANCE_COLORS: Record<string, string> = {
   AGAINST: "rgba(251, 113, 133, 0.9)",
   NEUTRAL: "rgba(148, 163, 184, 0.6)",
 };
+const AUTO_ROTATE_SPEED = 0.3;
+const DRAG_ROTATE_SENSITIVITY = 0.005;
+const MAX_DRAG_DELTA = 40;
+const AUTO_ROTATE_X_WOBBLE_FREQ = 0.3333;
 
 export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -91,7 +95,9 @@ export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
   const animRef = useRef<number>(0);
   const [size, setSize] = useState({ width: 800, height: 600 });
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
-  const [autoRotate, setAutoRotate] = useState(true);
+  const isMouseInCanvasRef = useRef(false);
+  const autoAngleRef = useRef(0);
+  const lastFrameAtRef = useRef<number | null>(null);
   const dragRef = useRef({ dragging: false, lastX: 0, lastY: 0, rotX: 0, rotY: 0 });
 
   // Pre-compute 3D positions
@@ -138,82 +144,100 @@ export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const canvasEl = canvas;
+
+    function onMouseEnter() {
+      isMouseInCanvasRef.current = true;
+    }
 
     function onMouseDown(e: MouseEvent) {
+      if (e.button !== 0) return;
       dragRef.current.dragging = true;
       dragRef.current.lastX = e.clientX;
       dragRef.current.lastY = e.clientY;
-      setAutoRotate(false);
     }
 
     function onMouseMove(e: MouseEvent) {
       if (dragRef.current.dragging) {
-        const dx = e.clientX - dragRef.current.lastX;
-        const dy = e.clientY - dragRef.current.lastY;
-        dragRef.current.rotY += dx * 0.005;
-        dragRef.current.rotX += dy * 0.005;
+        const dx = Math.max(
+          -MAX_DRAG_DELTA,
+          Math.min(MAX_DRAG_DELTA, e.clientX - dragRef.current.lastX),
+        );
+        const dy = Math.max(
+          -MAX_DRAG_DELTA,
+          Math.min(MAX_DRAG_DELTA, e.clientY - dragRef.current.lastY),
+        );
+        dragRef.current.rotY -= dx * DRAG_ROTATE_SENSITIVITY;
+        dragRef.current.rotX -= dy * DRAG_ROTATE_SENSITIVITY;
         dragRef.current.lastX = e.clientX;
         dragRef.current.lastY = e.clientY;
-      } else {
-        // Hover detection
-        const rect = canvas?.getBoundingClientRect();
-        if (!rect) return;
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        let closestIdx: number | null = null;
-        let closestDist = 30;
-        const cx = size.width / 2;
-        const cy = size.height / 2;
-        const scale = Math.min(size.width, size.height) * 0.35;
-        const elapsed = performance.now() / 1000;
-        const ry = autoRotate ? elapsed * 0.3 : dragRef.current.rotY;
-        const rx = autoRotate ? 0.3 : dragRef.current.rotX;
-
-        for (let i = 0; i < positions.current.length; i++) {
-          const [px, py, pz] = positions.current[i];
-          const cosY = Math.cos(ry),
-            sinY = Math.sin(ry);
-          const cosX = Math.cos(rx),
-            sinX = Math.sin(rx);
-          const x1 = px * cosY - pz * sinY;
-          const z1 = px * sinY + pz * cosY;
-          const y1 = py * cosX - z1 * sinX;
-          const sx = cx + x1 * scale;
-          const sy = cy + y1 * scale;
-          const dist = Math.sqrt((mx - sx) ** 2 + (my - sy) ** 2);
-          if (dist < closestDist) {
-            closestDist = dist;
-            closestIdx = i;
-          }
-        }
-        setHoverIdx(closestIdx);
       }
+
+      // Hover detection
+      const rect = canvasEl.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+
+      let closestIdx: number | null = null;
+      let closestDist = 30;
+      const cx = size.width / 2;
+      const cy = size.height / 2;
+      const scale = Math.min(size.width, size.height) * 0.35;
+      const ry = autoAngleRef.current + dragRef.current.rotY;
+      const rx =
+        0.3 +
+        Math.sin(autoAngleRef.current * AUTO_ROTATE_X_WOBBLE_FREQ) * 0.1 +
+        dragRef.current.rotX;
+
+      for (let i = 0; i < positions.current.length; i++) {
+        const [px, py, pz] = positions.current[i];
+        const cosY = Math.cos(ry),
+          sinY = Math.sin(ry);
+        const cosX = Math.cos(rx),
+          sinX = Math.sin(rx);
+        const x1 = px * cosY - pz * sinY;
+        const z1 = px * sinY + pz * cosY;
+        const y1 = py * cosX - z1 * sinX;
+        const sx = cx + x1 * scale;
+        const sy = cy + y1 * scale;
+        const dist = Math.sqrt((mx - sx) ** 2 + (my - sy) ** 2);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestIdx = i;
+        }
+      }
+      setHoverIdx(closestIdx);
     }
 
     function onMouseUp() {
       dragRef.current.dragging = false;
     }
+
     function onMouseLeave() {
+      isMouseInCanvasRef.current = false;
       dragRef.current.dragging = false;
       setHoverIdx(null);
     }
-    function onDblClick() {
-      setAutoRotate(true);
+
+    function onWindowMouseUp() {
+      dragRef.current.dragging = false;
     }
 
-    canvas.addEventListener("mousedown", onMouseDown);
-    canvas.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mouseup", onMouseUp);
-    canvas.addEventListener("mouseleave", onMouseLeave);
-    canvas.addEventListener("dblclick", onDblClick);
+    canvasEl.addEventListener("mouseenter", onMouseEnter);
+    canvasEl.addEventListener("mousedown", onMouseDown);
+    canvasEl.addEventListener("mousemove", onMouseMove);
+    canvasEl.addEventListener("mouseup", onMouseUp);
+    canvasEl.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("mouseup", onWindowMouseUp);
     return () => {
-      canvas.removeEventListener("mousedown", onMouseDown);
-      canvas.removeEventListener("mousemove", onMouseMove);
-      canvas.removeEventListener("mouseup", onMouseUp);
-      canvas.removeEventListener("mouseleave", onMouseLeave);
-      canvas.removeEventListener("dblclick", onDblClick);
+      canvasEl.removeEventListener("mouseenter", onMouseEnter);
+      canvasEl.removeEventListener("mousedown", onMouseDown);
+      canvasEl.removeEventListener("mousemove", onMouseMove);
+      canvasEl.removeEventListener("mouseup", onMouseUp);
+      canvasEl.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("mouseup", onWindowMouseUp);
     };
-  }, [size, autoRotate]);
+  }, [size]);
 
   // Render loop
   useEffect(() => {
@@ -234,7 +258,15 @@ export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
       const cx = w / 2;
       const cy = h / 2;
       const scale = Math.min(w, h) * 0.35;
-      const elapsed = performance.now() / 1000;
+      const now = performance.now();
+      if (lastFrameAtRef.current === null) {
+        lastFrameAtRef.current = now;
+      }
+      const dt = Math.min((now - lastFrameAtRef.current) / 1000, 0.05);
+      lastFrameAtRef.current = now;
+      if (!isMouseInCanvasRef.current) {
+        autoAngleRef.current += dt * AUTO_ROTATE_SPEED;
+      }
 
       // Background
       ctx.fillStyle = "#060612";
@@ -249,8 +281,11 @@ export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
         ctx.stroke();
       }
 
-      const ry = autoRotate ? elapsed * 0.3 : dragRef.current.rotY;
-      const rx = autoRotate ? 0.3 + Math.sin(elapsed * 0.1) * 0.1 : dragRef.current.rotX;
+      const ry = autoAngleRef.current + dragRef.current.rotY;
+      const rx =
+        0.3 +
+        Math.sin(autoAngleRef.current * AUTO_ROTATE_X_WOBBLE_FREQ) * 0.1 +
+        dragRef.current.rotX;
       const cosY = Math.cos(ry),
         sinY = Math.sin(ry);
       const cosX = Math.cos(rx),
@@ -392,14 +427,17 @@ export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
       ctx.fillText("3D Embedding Clusters", 20, 26);
       ctx.fillStyle = "rgba(255,255,255,0.25)";
       ctx.font = "9px system-ui, sans-serif";
-      ctx.fillText(`${opinions.length} opinions • drag to rotate`, 20, 42);
+      ctx.fillText(`${opinions.length} opinions • hover to pause / drag to rotate`, 20, 42);
 
       animRef.current = requestAnimationFrame(render);
     };
 
     animRef.current = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(animRef.current);
-  }, [opinions, size, hoverIdx, autoRotate]);
+    return () => {
+      lastFrameAtRef.current = null;
+      cancelAnimationFrame(animRef.current);
+    };
+  }, [opinions, size, hoverIdx]);
 
   return (
     <div
